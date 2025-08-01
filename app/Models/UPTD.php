@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class UPTD extends Model
 {
-    protected $fillable = ['nama', 'alamat'];
+
+    protected $table = 'uptds';
+    protected $fillable = [
+        'nama',
+        // 'alamat'
+    ];
 
     public function pasars()
     {

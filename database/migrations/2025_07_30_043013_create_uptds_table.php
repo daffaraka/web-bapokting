@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('uptds', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('alamat')->nullable();
+            // $table->string('alamat')->nullable();
             $table->timestamps();
         });
     }
