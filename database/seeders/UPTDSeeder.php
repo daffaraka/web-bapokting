@@ -13,10 +13,20 @@ class UPTDSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
 
+        $daftarUptd = [
+            'Setu-Cibitung & Sukatani',
+            'Cibarusah',
+            'Tambun',
+            'Serang',
+            'Cikarang & Pertokoan',
+            'Babelan',
+            'Tarumajaya',
+            'KD.Gede',
+        ];
+        foreach ($daftarUptd as $namaUptd) {
             UPTD::create([
-                'nama' => 'UPTD ' . $i
+                'nama' => $namaUptd
             ]);
         }
     }

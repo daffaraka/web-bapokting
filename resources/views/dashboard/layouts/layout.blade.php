@@ -21,7 +21,7 @@
                     "Font Awesome 5 Brands",
                     "simple-line-icons",
                 ],
-                urls: ["assets/css/fonts.min.css"],
+                urls: ["{{ asset('assets/css/fonts.min.css') }}"],
             },
             active: function() {
                 sessionStorage.fonts = true;
@@ -56,12 +56,13 @@
                         </div>
 
 
-                        {{-- @if(request()->routeIs("{$modul}"))
+                        @if(!empty($route_create))
                             <div class="ms-md-auto py-2 py-md-0">
                                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                                 <a href="{{$route_create}}" class="btn btn-primary btn-round">Tambah {{$modul}}</a>
                             </div>
-                        @endif --}}
+
+                        @endif
                     </div>
                     @yield('content')
                 </div>

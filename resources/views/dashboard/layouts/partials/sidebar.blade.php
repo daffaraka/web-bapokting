@@ -23,34 +23,72 @@
            <div class="sidebar-content">
                <ul class="nav nav-secondary">
 
-                   <li class="nav-item">
-                       <a href="harga-monitoring.html">
+
+                   <li class="nav-section">
+                       <span class="sidebar-mini-icon">
+                           <i class="fa fa-ellipsis-h"></i>
+                       </span>
+                       <h4 class="text-section">Dashboard</h4>
+                   </li>
+
+                   <li class="nav-item {{ (request()->routeIs('dashboard')) ? 'active' : '' }}">
+                       <a href="{{ route('dashboard') }}">
                            <i class="fas fa-chart-line"></i>
-                           <p>Harga Monitoring</p>
+                           <p>Dashboard </p>
                        </a>
                    </li>
-                   <li class="nav-item">
-                       <a href="komoditas.html">
+
+                   <li class="nav-section">
+                       <span class="sidebar-mini-icon">
+                           <i class="fa fa-ellipsis-h"></i>
+                       </span>
+                       <h4 class="text-section">Frontpage</h4>
+                   </li>
+
+                   <li class="nav-item {{ (request()->routeIs('user.index')) ? 'active' : '' }}">
+                       <a href="{{ route('user.index') }}">
+                           <i class="fas fa-newspaper"></i>
+                           <p>Berita </p>
+                       </a>
+                   </li>
+
+                   <li class="nav-section">
+                       <span class="sidebar-mini-icon">
+                           <i class="fa fa-ellipsis-h"></i>
+                       </span>
+                       <h4 class="text-section">Data</h4>
+                   </li>
+
+                   <li class="nav-item {{ (request()->routeIs('harga-monitoring.index')) ? 'active' : '' }}">
+                       <a href="{{ route('harga-monitoring.index') }}">
+                           <i class="fas fa-chart-line"></i>
+                           <p>Monitoring </p>
+                       </a>
+                   </li>
+
+                   <li class="nav-item {{ (request()->routeIs('perkembangan-harga.index')) ? 'active' : '' }}">
+                       <a href="{{ route('perkembangan-harga.index') }}">
+                           <i class="fas fa-chart-bar"></i>
+                           <p>Perkembangan Harga </p>
+                       </a>
+                   </li>
+
+                   <li class="nav-item {{ (request()->routeIs('komoditas.index')) ? 'active' : '' }}">
+                       <a href="{{ route('komoditas.index') }}">
                            <i class="fas fa-box"></i>
-                           <p>Komoditas</p>
+                           <p>Data Komoditas </p>
                        </a>
                    </li>
-                   <li class="nav-item">
-                       <a href="pasar.html">
+                   <li class="nav-item {{ (request()->routeIs('pasar.index')) ? 'active' : '' }}">
+                       <a href="{{ route('pasar.index') }}">
                            <i class="fas fa-store"></i>
                            <p>Pasar</p>
                        </a>
                    </li>
-                   <li class="nav-item">
-                       <a href="{{route('uptd.index')}}">
+                   <li class="nav-item {{ (request()->routeIs('uptd.index')) ? 'active' : '' }}">
+                       <a href="{{ route('uptd.index') }}">
                            <i class="fas fa-building"></i>
                            <p>UPTD</p>
-                       </a>
-                   </li>
-                   <li class="nav-item">
-                       <a href="{{route('user.index')}}">
-                           <i class="fas fa-user"></i>
-                           <p>User</p>
                        </a>
                    </li>
 
@@ -231,8 +269,8 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li> --}}
-                   {{-- <li class="nav-item">
+                        </li>
+                   <li class="nav-item">
                        <a href="widgets.html">
                            <i class="fas fa-desktop"></i>
                            <p>Widgets</p>

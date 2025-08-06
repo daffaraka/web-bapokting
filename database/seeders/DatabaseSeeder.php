@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UPTDSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            KomoditasSeeder::class,
+            PasarSeeder::class,
+            HargaMonitoringSeeder::class
         ]);
     }
 }

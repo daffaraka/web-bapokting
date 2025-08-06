@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\HargaMonitoring;
 use Illuminate\Http\Request;
 
-class HargaMonitoringController extends Controller
+class PerkembanganHargaController extends Controller
 {
-        protected $routeCreate;
+    protected $routeCreate;
 
 
     public function __construct()
     {
-        $this->routeCreate = route('harga-monitoring.create');
+        $this->routeCreate = route('perkembangan-harga.create');
     }
     public function index()
     {
+
+        $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get();
+        // dd($perkembangan);
         $data = [
-        'title' => 'Monitoring Harga',
-        'description' => 'Halaman ini menampilkan monitoring harga komoditas yang ada di dalam database',
-        'modul' => 'Monitoring Harga'
 
+            'title' => 'Perkembangan Harga',
+            'description' => 'Halaman ini menampilkan perkembangan harga komoditas yang ada di dalam database',
+            'modul' => 'Perkembangan Harga',
+            'perkembanganHargas' => $perkembangan
         ];
-
-        return view('dashboard.monitoring-komoditas.monitoring-index',$data);
+        return view('dashboard.perkembangan-harga.perkembangan-harga-index', $data);
     }
 
     /**
@@ -45,7 +48,7 @@ class HargaMonitoringController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HargaMonitoring $hargaMonitoring)
+    public function show(string $id)
     {
         //
     }
@@ -53,7 +56,7 @@ class HargaMonitoringController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HargaMonitoring $hargaMonitoring)
+    public function edit(string $id)
     {
         //
     }
@@ -61,7 +64,7 @@ class HargaMonitoringController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HargaMonitoring $hargaMonitoring)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -69,7 +72,7 @@ class HargaMonitoringController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HargaMonitoring $hargaMonitoring)
+    public function destroy(string $id)
     {
         //
     }

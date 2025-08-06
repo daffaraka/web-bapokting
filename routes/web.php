@@ -5,8 +5,10 @@ use App\Http\Controllers\UPTDController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\HargaMonitoringController;
+use App\Http\Controllers\PerkembanganHargaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,9 +29,14 @@ require __DIR__.'/auth.php';
 Route::view('layout', 'dashboard.layouts.layout');
 Route::view('base-layout', 'dashboard.layouts.base-view');
 
-
-Route::resource('komoditas', KomoditasController::class);
+Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard');
+Route::resource('komoditas', KomoditasController::class)->parameters(['komoditas' => 'komoditas']);
 Route::resource('pasar', PasarController::class);
 Route::resource('uptd', UPTDController::class);
 Route::resource('user', UserController::class);
 Route::resource('harga-monitoring', HargaMonitoringController::class);
+
+
+Route::resource('perkembangan-harga', PerkembanganHargaController::class);
+
+

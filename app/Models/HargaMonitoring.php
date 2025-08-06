@@ -6,5 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class HargaMonitoring extends Model
 {
-    //
+    protected $fillable = [
+        'pasar_id',
+        'komoditas_id',
+        'user_id',
+        'tanggal',
+        'harga',
+        'stok',
+    ];
+
+    // Define relationships
+
+    public function pasar()
+    {
+        return $this->belongsTo(Pasar::class);
+    }
+
+    public function komoditas()
+    {
+        return $this->belongsTo(Komoditas::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
