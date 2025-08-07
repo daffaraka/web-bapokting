@@ -4,7 +4,7 @@
         <div class="card-header">
             <h3 class="card-title">Data Perkembangan Harga</h3>
         </div>
-        <div class="card-body">
+        {{-- <div class="card-body">
 
 
 
@@ -51,7 +51,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
 
     </div>

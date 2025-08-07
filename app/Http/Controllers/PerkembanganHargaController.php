@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HargaMonitoring;
+use App\Models\Komoditas;
 use Illuminate\Http\Request;
+use App\Models\HargaMonitoring;
 
 class PerkembanganHargaController extends Controller
 {
@@ -17,14 +18,16 @@ class PerkembanganHargaController extends Controller
     public function index()
     {
 
-        $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get();
+        // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
+
+        // $perkembangan = Komoditas::with(['harga_monitorings','pasar','user'])->whereHas('harga_monitorings')->get()->groupBy('nama');
         // dd($perkembangan);
         $data = [
 
             'title' => 'Perkembangan Harga',
             'description' => 'Halaman ini menampilkan perkembangan harga komoditas yang ada di dalam database',
+            // 'perkembanganHargas' => $perkembangan,
             'modul' => 'Perkembangan Harga',
-            'perkembanganHargas' => $perkembangan
         ];
         return view('dashboard.perkembangan-harga.perkembangan-harga-index', $data);
     }
