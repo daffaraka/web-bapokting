@@ -52,7 +52,7 @@ class HargaMonitoringController extends Controller
                 'pointHoverRadius' => 4,
                 'pointHoverBorderWidth' => 1,
                 'pointRadius' => 4,
-                'backgroundColor' => '#' . substr(md5(uniqid(mt_rand(), true)), 0, 6) . '8c',
+                // 'backgroundColor' => '#' . substr(md5(uniqid(mt_rand(), true)), 0, 6) . '8c',
                 'fill' => true,
                 'borderWidth' => 2,
                 'data' => $sorted->pluck('harga')->values(),

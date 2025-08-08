@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\UPTD;
+use App\Models\Pasar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UPTDController extends Controller
 {
@@ -29,7 +31,8 @@ class UPTDController extends Controller
     {
         $data = [
             'title' => 'Tambah UPTD',
-            'description' => 'Halaman ini digunakan untuk menambahkan data UPTD yang baru'
+            'description' => 'Halaman ini digunakan untuk menambahkan data UPTD yang baru',
+            'pasar' => Pasar::all()
         ];
         return view('dashboard.uptd.uptd-create', $data);
     }
