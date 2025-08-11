@@ -40,7 +40,7 @@
                                             style="display:inline;" id="form_delete">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"
+                                            <button type="button" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"
                                                 title="Delete">
                                                 <i class="fa fa-times"></i>
                                             </button>
@@ -61,6 +61,31 @@
     <script>
         $("#basic-datatables").DataTable({});
 
+        $(".deleteBtn").click(function(e) {
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: 'Anda yakin?',
+                text: "Data tidak dapat dikembalikan!",
+                type: 'warning',
+                buttons: {
+                    confirm: {
+                        text: "Ya, hapus!",
+                        className: "btn btn-success",
+                    },
+                    cancel: {
+                        visible: true,
+                        className: "btn btn-danger",
+                    },
+                },
+            }).then((hapus) => {
+                if (hapus) {
+                    form.submit();
+                } else {
+                    swal.close();
+                }
+            });
+        })
 
         $(".deleteBtn").click(function(e) {
             e.preventDefault();

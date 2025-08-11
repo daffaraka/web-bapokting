@@ -2,40 +2,34 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Create User</h3>
+            <h3 class="card-title">Tambah Pasar</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('user.store') }}" method="POST">
+            <form action="{{ route('pasar.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
-                    @error('name')
+                    <label for="nama">Nama</label>
+                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
+                    @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
-                    @error('email')
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" name="lokasi" id="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" required>
+                    @error('lokasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
-                    @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
-                        <option value="">Pilih Jabatan</option>
-                        <option value="admin">Admin</option>
-                        <option value="operator">Operator</option>
+                    <label for="uptd_id">UPTD</label>
+                    <select name="uptd_id" id="uptd_id" class="form-control @error('uptd_id') is-invalid @enderror" required>
+                        <option value="">Pilih UPTD</option>
+                        @foreach ($uptd as $u)
+                            <option value="{{ $u->id }}" {{ old('uptd_id') == $u->id ? 'selected' : '' }}>{{ $u->nama }}</option>
+                        @endforeach
                     </select>
-                    @error('role')
+                    @error('uptd_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -44,3 +38,4 @@
 
     </div>
 @endsection
+

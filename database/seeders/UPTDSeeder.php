@@ -26,7 +26,7 @@ class UPTDSeeder extends Seeder
         ];
         foreach ($daftarUptd as $namaUptd) {
             UPTD::create([
-                'nama' => $namaUptd
+                'nama' => 'UPTD '.$namaUptd
             ]);
         }
     }
