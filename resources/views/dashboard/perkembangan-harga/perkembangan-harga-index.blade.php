@@ -4,7 +4,7 @@
         <div class="card-header">
             <h3 class="card-title">Data Perkembangan Harga</h3>
         </div>
-        {{-- <div class="card-body">
+        <div class="card-body">
 
 
 
@@ -13,9 +13,8 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Nama Pasar</th>
                             <th>Nama Komoditas</th>
-                            <th>Nama User</th>
+                            <th>Nama Pasar</th>
                             <th>Tanggal</th>
                             <th>Harga</th>
                             <th>Stok</th>
@@ -23,36 +22,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perkembanganHargas as $perkembanganHarga)
+                        @foreach ($perkembanganHargas as $komoditas => $perkembanganHarga)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $perkembanganHarga->pasar->nama }}</td>
-                                <td>{{ $perkembanganHarga->komoditas->nama }}</td>
-                                <td>{{ $perkembanganHarga->user->name }}</td>
-                                <td>{{ $perkembanganHarga->tanggal }}</td>
-                                <td>Rp.{{ number_format($perkembanganHarga->harga, 1, '', '.') }}</td>
-                                <td>{{ $perkembanganHarga->stok }}</td>
+                                <td>{{ $perkembanganHarga->nama }}</td>
+                                <td>{{ $perkembanganHarga->jenis }}</td>
                                 <td>
-                                    <div class="form-button-action gap-2">
-                                        <a href="{{ route('perkembangan-harga.edit', $perkembanganHarga->id) }}" class="btn btn-primary " data-bs-toggle="tooltip" title="Edit">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('perkembangan-harga.destroy', $perkembanganHarga->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                              <button type="button" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"
-                                                title="Delete">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    @foreach ($perkembanganHarga->harga_monitorings as $monitorings)
+                                        <p>{{ $monitorings->pasar->nama }}</p>
+                                    @endforeach
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-        </div> --}}
+        </div>
 
 
     </div>
@@ -61,7 +47,7 @@
 @push('scripts')
     <script>
         $("#basic-datatables").DataTable({});
-$(".deleteBtn").click(function(e) {
+        $(".deleteBtn").click(function(e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({

@@ -14,11 +14,17 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => 'password'
+        ]);
+
         for ($i=1; $i <= 3; $i++) {
             User::factory()->create([
                 'name' => 'Admin ' . $i,
                 'email' => 'admin' . $i . '@example.com',
-                'role' => 'admin',
+                'password' => 'password'
             ]);
         }
 
@@ -27,7 +33,7 @@ class UserSeeder extends Seeder
             User::factory()->create([
                 'name' => 'UPTD ' . $i,
                 'email' => 'uptd' . $i . '@example.com',
-                'role' => 'operator',
+                'password' => 'password'
             ]);
         }
     }

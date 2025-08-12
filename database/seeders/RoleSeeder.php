@@ -17,71 +17,77 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'op_uptd']);
 
         $adminPermissions = [
-            // Modul 1: Manajemen Komoditas
+
+            'dashboard-read',
+            // Modul 1: Komoditas
             'komoditas-create',
-            'komoditas-list',
-            'komoditas-edit',
+            'komoditas-read',
+            'komoditas-update',
             'komoditas-delete',
-            'komoditas-view_history',
+            'komoditas-view-history',
 
             // Modul 2: Monitoring Harga
-            'harga_create-create', // input harga & stok
-            'harga_create-list',   // lihat data harga harian
-            'harga_create-edit',   // edit harga & stok
-            'harga_create-delete', // validasi input
-            'harga_create-view_history',
+            'harga-create', // input harga & stok
+            'harga-read',
+            'harga-update', // edit harga & stok
+            'harga-delete', // validasi dianggap sebagai delete/close
+            'harga-view-history',
 
             // Modul 3: Laporan & Visualisasi
-            'laporan-list',        // lihat laporan seluruh wilayah
-            'laporan-filter',      // filter laporan
-            'laporan-download',    // download laporan
-            'laporan-grafik',      // lihat grafik
+            'laporan-create', // jika ada fitur buat laporan manual
+            'laporan-read', // lihat laporan seluruh wilayah
+            'laporan-update', // jika laporan bisa diubah (opsional)
+            'laporan-delete', // jika laporan bisa dihapus (opsional)
+            'laporan-filter', // filter laporan
+            'laporan-download', // download excel/pdf
+            'laporan-grafik', // lihat grafik
 
-            // Modul 4: Manajemen User & Hak Akses
-            'user-login',
-            'user-create',
-            'user-list',
-            'user-edit',
-            'user-delete',
-            'user-password',
+            // Modul 4: Manajemen User
+            'user-create', // tambah operator
+            'user-read', // lihat daftar user
+            'user-update', // edit user / profil sendiri
+            'user-delete', // hapus operator
+            'user-login', // login ke sistem
+            'user-password', // ganti password sendiri
 
             // Modul 5: Manajemen UPTD
             'uptd-create',
-            'uptd-list',
-            'uptd-edit',
+            'uptd-read',
+            'uptd-update',
             'uptd-delete',
 
             // Modul 6: Manajemen Pasar
             'pasar-create',
-            'pasar-list',
-            'pasar-edit',
+            'pasar-read',
+            'pasar-update',
             'pasar-delete'
         ];
 
         $opUptdPermissions = [
-            // Modul 1: Manajemen Komoditas
-            'komoditas-list',
-            'komoditas-view_history',
+            'dashboard-read',
+            // Modul 1: Komoditas
+            'komoditas-read',
+            'komoditas-view-history',
 
             // Modul 2: Monitoring Harga
-            'harga_create-create', // wilayah sendiri
-            'harga_create-list',
-            'harga_create-edit',   // jika belum dikunci
-            'harga_create-delete', // validasi input wilayah sendiri
-            'harga_create-view_history',
+            'harga-create', // wilayah sendiri
+            'harga-read',
+            'harga-update', // jika belum dikunci
+            'harga-delete', // validasi input wilayah sendiri
+            'harga-view-history',
 
             // Modul 3: Laporan & Visualisasi
             'laporan-filter',
             'laporan-download',
             'laporan-grafik',
 
-            // Modul 4: Manajemen User & Hak Akses
+            // Modul 4: Manajemen User
             'user-login',
-            'user-list', // melihat profil sendiri
+            'user-read', // melihat profil sendiri
             'user-password',
 
             // Modul 5: Manajemen Pasar
-            'pasar-list'
+            'pasar-read'
         ];
 
 

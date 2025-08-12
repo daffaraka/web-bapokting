@@ -25,8 +25,11 @@ class DatabaseSeeder extends Seeder
             UPTDSeeder::class,
             UserSeeder::class,
             KomoditasSeeder::class,
+            JenisKomoditasSeeder::class,
             PasarSeeder::class,
-            HargaMonitoringSeeder::class
+            HargaMonitoringSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }

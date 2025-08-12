@@ -37,22 +37,23 @@ class HargaMonitoringController extends Controller
 
 
         $datasets = [];
+        $primaryColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
 
         foreach ($hargaMonitoringData as $komoditas => $dataGroup) {
-
-            // dd($komoditas);
             $sorted = $dataGroup->sortBy('tanggal');
+            $colorIndex = array_rand($primaryColors);
+            $color = $primaryColors[$colorIndex];
 
             $datasets[] = [
                 'label' => $komoditas,
-                'borderColor' => '#' . substr(md5(uniqid(mt_rand(), true)), 0, 6),
+                'borderColor' => $color,
                 'pointBorderColor' => '#FFF',
-                'pointBackgroundColor' => '#' . substr(md5(uniqid(mt_rand(), true)), 0, 6),
+                'pointBackgroundColor' => $color,
                 'pointBorderWidth' => 2,
                 'pointHoverRadius' => 4,
                 'pointHoverBorderWidth' => 1,
                 'pointRadius' => 4,
-                // 'backgroundColor' => '#' . substr(md5(uniqid(mt_rand(), true)), 0, 6) . '8c',
+                'backgroundColor' => 'transparent',
                 'fill' => true,
                 'borderWidth' => 2,
                 'data' => $sorted->pluck('harga')->values(),

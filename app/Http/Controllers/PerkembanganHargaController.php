@@ -20,13 +20,13 @@ class PerkembanganHargaController extends Controller
 
         // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
 
-        // $perkembangan = Komoditas::with(['harga_monitorings','pasar','user'])->whereHas('harga_monitorings')->get()->groupBy('nama');
+        $perkembangan = Komoditas::with(['harga_monitorings.pasar'])->whereHas('harga_monitorings')->get();
         // dd($perkembangan);
         $data = [
 
             'title' => 'Perkembangan Harga',
             'description' => 'Halaman ini menampilkan perkembangan harga komoditas yang ada di dalam database',
-            // 'perkembanganHargas' => $perkembangan,
+            'perkembanganHargas' => $perkembangan,
             'modul' => 'Perkembangan Harga',
         ];
         return view('dashboard.perkembangan-harga.perkembangan-harga-index', $data);

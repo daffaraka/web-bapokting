@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class KomoditasController extends Controller
 {
 
-        protected $routeCreate;
+    protected $routeCreate;
 
 
     public function __construct()
@@ -22,7 +22,7 @@ class KomoditasController extends Controller
     public function index()
     {
         $data = [
-            'komoditas' => Komoditas::all(),
+            'komoditas' => Komoditas::with('jenis_komoditas')->get(),
             'title' => 'Data Komoditas',
             'description' => 'Halaman ini menampilkan data komoditas yang ada di dalam database',
             'route_create' => $this->routeCreate,
@@ -49,19 +49,10 @@ class KomoditasController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|max:255',
-            'jenis' => 'required|max:255',
-            'harga' => 'required|numeric',
-            'satuan' => 'required|max:255'
+            'nama_komoditas' => 'required|max:255',
         ], [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-            'jenis.required' => 'Jenis wajib diisi.',
-            'jenis.max' => 'Jenis tidak boleh lebih dari 255 karakter.',
-            'harga.required' => 'Harga wajib diisi.',
-            'harga.numeric' => 'Harga harus berupa angka.',
-            'satuan.required' => 'Satuan wajib diisi.',
-            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.'
+            'nama_komoditas.required' => 'Nama komoditas wajib diisi.',
+            'nama_komoditas.max' => 'Nama komoditas tidak boleh lebih dari 255 karakter.',
         ]);
 
         if ($validator->fails()) {
@@ -71,10 +62,7 @@ class KomoditasController extends Controller
         }
 
         Komoditas::create([
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'harga' => $request->harga,
-            'satuan' => $request->satuan
+            'nama_komoditas' => $request->nama,
         ]);
 
         return redirect()->route('komoditas.index')->with('success', 'Data komoditas berhasil ditambahkan');
@@ -112,19 +100,12 @@ class KomoditasController extends Controller
     public function update(Request $request, Komoditas $komoditas)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|max:255',
-            'jenis' => 'required|max:255',
-            'harga' => 'required|numeric',
-            'satuan' => 'required|max:255'
+            'nama_komoditas' => 'required|max:255',
+
         ], [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-            'jenis.required' => 'Jenis wajib diisi.',
-            'jenis.max' => 'Jenis tidak boleh lebih dari 255 karakter.',
-            'harga.required' => 'Harga wajib diisi.',
-            'harga.numeric' => 'Harga harus berupa angka.',
-            'satuan.required' => 'Satuan wajib diisi.',
-            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.'
+            'nama_komoditas.required' => 'Nama wajib diisi.',
+            'nama_komoditas.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
         ]);
 
         if ($validator->fails()) {
@@ -134,10 +115,7 @@ class KomoditasController extends Controller
         }
 
         $komoditas->update([
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'harga' => $request->harga,
-            'satuan' => $request->satuan
+            'nama_komoditas' => $request->nama,
         ]);
 
         return redirect()->route('komoditas.index')->with('success', 'Data komoditas berhasil diupdate');
@@ -150,6 +128,6 @@ class KomoditasController extends Controller
     {
         $oldKomoditas = $komoditas->nama;
         $komoditas->delete();
-        return redirect()->route('komoditas.index')->with('success', 'Data komoditas : '.$oldKomoditas.' berhasil dihapus');
+        return redirect()->route('komoditas.index')->with('success', 'Data komoditas : ' . $oldKomoditas . ' berhasil dihapus');
     }
 }

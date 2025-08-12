@@ -14,48 +14,51 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+
+            // Dashboard
+            'dashboard-read',
             // Modul 1: Komoditas
-            'komoditas_create',
-            'komoditas_read',
-            'komoditas_update',
-            'komoditas_delete',
-            'komoditas_view_history',
+            'komoditas-create',
+            'komoditas-read',
+            'komoditas-update',
+            'komoditas-delete',
+            'komoditas-view-history',
 
             // Modul 2: Monitoring Harga
-            'harga_create',       // input harga & stok
-            'harga_read',
-            'harga_update',       // edit harga & stok
-            'harga_delete',       // validasi dianggap sebagai delete/close
-            'harga_view_history',
+            'harga-create',       // input harga & stok
+            'harga-read',
+            'harga-update',       // edit harga & stok
+            'harga-delete',       // validasi dianggap sebagai delete/close
+            'harga-view-history',
 
             // Modul 3: Laporan & Visualisasi
-            'laporan_create',     // jika ada fitur buat laporan manual
-            'laporan_read',       // lihat laporan seluruh wilayah
-            'laporan_update',     // jika laporan bisa diubah (opsional)
-            'laporan_delete',     // jika laporan bisa dihapus (opsional)
-            'laporan_filter',     // filter laporan
-            'laporan_download',   // download excel/pdf
-            'laporan_grafik',     // lihat grafik
+            'laporan-create',     // jika ada fitur buat laporan manual
+            'laporan-read',       // lihat laporan seluruh wilayah
+            'laporan-update',     // jika laporan bisa diubah (opsional)
+            'laporan-delete',     // jika laporan bisa dihapus (opsional)
+            'laporan-filter',     // filter laporan
+            'laporan-download',   // download excel/pdf
+            'laporan-grafik',     // lihat grafik
 
             // Modul 4: Manajemen User
-            'user_create',        // tambah operator
-            'user_read',          // lihat daftar user
-            'user_update',        // edit user / profil sendiri
-            'user_delete',        // hapus operator
-            'user_login',         // login ke sistem
-            'user_password',      // ganti password sendiri
+            'user-create',        // tambah operator
+            'user-read',          // lihat daftar user
+            'user-update',        // edit user / profil sendiri
+            'user-delete',        // hapus operator
+            'user-login',         // login ke sistem
+            'user-password',      // ganti password sendiri
 
             // Modul 5: Manajemen UPTD
-            'uptd_create',
-            'uptd_read',
-            'uptd_update',
-            'uptd_delete',
+            'uptd-create',
+            'uptd-read',
+            'uptd-update',
+            'uptd-delete',
 
             // Modul 6: Manajemen Pasar
-            'pasar_create',
-            'pasar_read',
-            'pasar_update',
-            'pasar_delete'
+            'pasar-create',
+            'pasar-read',
+            'pasar-update',
+            'pasar-delete'
         ];
 
 

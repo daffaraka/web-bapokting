@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('komoditas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('jenis');
-            $table->bigInteger('harga');
-            $table->string('satuan')->nullable(); // contoh: kg, liter
+            $table->string('nama_komoditas');
             $table->timestamps();
         });
     }

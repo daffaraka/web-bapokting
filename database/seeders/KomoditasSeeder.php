@@ -45,33 +45,18 @@ class KomoditasSeeder extends Seeder
             'Daging ayam',
             'Tomat',
             'Ikan mas',
-            'Ikan lele'
-        ];
-
-        $satuan = [
-            'kg',
-            'ons',
-            'liter'
+            'Ikan lele',
         ];
 
 
-        $jenisKomoditas = [
-            'Komoditas Pertanian',
-            'Komoditas Energi',
-            'Komoditas Logam',
-            'Komoditas Peternakan',
-            'Komoditas Perdagangan',
-            'Komoditas Keras',
-            'Komoditas Lunak'
-        ];
+
+
+
 
 
         for ($i = 0; $i < count($komoditas); $i++) {
             Komoditas::create([
-                'nama' => $komoditas[$i],
-                'satuan' => $satuan[array_rand($satuan)],
-                'jenis' => $jenisKomoditas[array_rand($jenisKomoditas)],
-                'harga' => rand(1, 1000) * 1000 / 10,
+                'nama_komoditas' => $komoditas[$i],
             ]);
         }
     }

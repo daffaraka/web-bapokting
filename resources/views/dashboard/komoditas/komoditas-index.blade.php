@@ -11,9 +11,7 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Nama</th>
-                            <th>Jenis</th>
-                            <th>Harga (Rp)</th>
-                            <th>Satuan</th>
+                            <th>Jumlah Jenis</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -21,15 +19,8 @@
                         @foreach ($komoditas as $komoditas)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $komoditas->nama }}</td>
-                                <td>{{ $komoditas->jenis }}</td>
-                                <td>Rp.{{ number_format($komoditas->harga, 1, '', '.') }}</td>
-                                <td>
-                                    <button
-                                        class="btn {{ $komoditas->satuan == 'kg' ? 'btn-primary' : ($komoditas->satuan == 'liter' ? 'btn-secondary' : 'btn-warning') }}">
-                                        {{ strtoupper($komoditas->satuan) }}
-                                    </button>
-                                </td>
+                                <td>{{ $komoditas->nama_komoditas }}</td>
+                                <td>{{ $komoditas->jenis_komoditas->count() }} </td>
                                 <td>
                                     <div class="form-button-action gap-2">
                                         <a href="{{ route('komoditas.edit', $komoditas->id) }}" class="btn btn-primary "
