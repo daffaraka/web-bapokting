@@ -45,12 +45,12 @@
                        <h4 class="text-section">Frontpage</h4>
                    </li>
 
-                   {{-- <li class="nav-item {{ (request()->routeIs('user.index')) ? 'active' : '' }}">
+                   <li class="nav-item {{ (request()->routeIs('user.index')) ? 'active' : '' }}">
                        <a href="{{ route('user.index') }}">
                            <i class="fas fa-newspaper"></i>
                            <p>Berita </p>
                        </a>
-                   </li> --}}
+                   </li>
 
                    <li class="nav-section">
                        <span class="sidebar-mini-icon">
