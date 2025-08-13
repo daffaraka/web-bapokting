@@ -1,17 +1,18 @@
 <?php
 
+use App\Models\JenisKomoditas;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UPTDController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Frontpage\FrontPageController;
 use App\Http\Controllers\KomoditasController;
-use App\Http\Controllers\HargaMonitoringController;
 use App\Http\Controllers\JenisKomoditasController;
+use App\Http\Controllers\HargaMonitoringController;
+use App\Http\Controllers\Frontpage\BeritaController;
 use App\Http\Controllers\PerkembanganHargaController;
-use App\Models\JenisKomoditas;
+use App\Http\Controllers\Frontpage\FrontPageController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
 
