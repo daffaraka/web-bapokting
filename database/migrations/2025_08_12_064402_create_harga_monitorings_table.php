@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('harga_monitorings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pasar_id')->constrained()->onDelete('cascade');
-            $table->foreignId('komoditas_id')->constrained()->onDelete('cascade');
+            $table->foreignId('jenis_komoditas_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // operator yang input
             $table->date('tanggal');
             $table->decimal('harga', 10, 2);

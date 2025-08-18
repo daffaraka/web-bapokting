@@ -45,8 +45,8 @@
                        <h4 class="text-section">Frontpage</h4>
                    </li>
 
-                   <li class="nav-item {{ (request()->routeIs('user.index')) ? 'active' : '' }}">
-                       <a href="{{ route('user.index') }}">
+                   <li class="nav-item {{ request()->routeIs('berita.*') ? 'active' : '' }}">
+                       <a href="{{ route('berita.index') }}">
                            <i class="fas fa-newspaper"></i>
                            <p>Berita </p>
                        </a>
@@ -59,33 +59,33 @@
                        <h4 class="text-section">Data</h4>
                    </li>
 
-                   <li class="nav-item {{ request()->routeIs('harga-monitoring.index') ? 'active' : '' }}">
+                   <li class="nav-item {{ request()->routeIs('harga-monitoring.*') ? 'active' : '' }}">
                        <a href="{{ route('harga-monitoring.index') }}">
                            <i class="fas fa-chart-line"></i>
                            <p>Monitoring </p>
                        </a>
                    </li>
 
-                   <li class="nav-item {{ request()->routeIs('perkembangan-harga.index') ? 'active' : '' }}">
+                   <li class="nav-item {{ request()->routeIs('perkembangan-harga.*') ? 'active' : '' }}">
                        <a href="{{ route('perkembangan-harga.index') }}">
                            <i class="fas fa-chart-bar"></i>
                            <p>Perkembangan Harga </p>
                        </a>
                    </li>
-                   <li class="nav-item {{ request()->routeIs('komoditas.index') ? 'active' : '' }}">
+                   <li class="nav-item {{ request()->routeIs('komoditas.*') ? 'active' : '' }}">
                        <a href="{{ route('komoditas.index') }}">
                            <i class="fas fa-box"></i>
                            <p> Komoditas </p>
                        </a>
                    </li>
 
-                     <li class="nav-item {{ request()->routeIs('jenis-komoditas.index') ? 'active' : '' }}">
+                     <li class="nav-item {{ request()->routeIs('jenis-komoditas.*') ? 'active' : '' }}">
                        <a href="{{ route('jenis-komoditas.index') }}">
                            <i class="fas fa-list-ul"></i>
                            <p> Jenis Komoditas </p>
                        </a>
                    </li>
-                   <li class="nav-item {{ request()->routeIs('pasar.index') ? 'active' : '' }}">
+                   <li class="nav-item {{ request()->routeIs('pasar.*') ? 'active' : '' }}">
                        <a href="{{ route('pasar.index') }}">
                            <i class="fas fa-store"></i>
                            <p>Pasar</p>
@@ -93,7 +93,7 @@
                    </li>
 
 
-                   <li class="nav-item {{ request()->routeIs('uptd.index') ? 'active' : '' }}">
+                   <li class="nav-item {{ request()->routeIs('uptd.*') ? 'active' : '' }}">
                        <a href="{{ route('uptd.index') }}">
                            <i class="fas fa-building"></i>
                            <p>UPTD</p>

@@ -8,7 +8,7 @@ class HargaMonitoring extends Model
 {
     protected $fillable = [
         'pasar_id',
-        'komoditas_id',
+        'jenis_komoditas_id',
         'user_id',
         'tanggal',
         'harga',

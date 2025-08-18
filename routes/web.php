@@ -10,28 +10,35 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\JenisKomoditasController;
 use App\Http\Controllers\HargaMonitoringController;
+use App\Http\Controllers\ManajemenBeritaController;
 use App\Http\Controllers\Frontpage\BeritaController;
 use App\Http\Controllers\PerkembanganHargaController;
 use App\Http\Controllers\Frontpage\FrontPageController;
 
-Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
 
 
-
-
-require __DIR__ . '/auth.php';
-
-
-
+// Base Layout
 Route::view('layout', 'dashboard.layouts.layout');
 Route::view('base-layout', 'dashboard.layouts.base-view');
 
-Route::middleware(['auth'])->group(function () {
+
+
+// Front page
+Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
+Route::get('/berita', [FrontPageController::class, 'berita'])->name('berita');
+Route::prefix('komoditas')->group(function () {
+    Route::get('/', [FrontPageController::class, 'komoditas'])->name('komoditas');
+});
+
+
+
+// Dashboard
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
 
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('komoditas', KomoditasController::class)->parameters(['komoditas' => 'komoditas']);
     Route::resource('jenis-komoditas', JenisKomoditasController::class)->parameters(['jenis-komoditas' => 'jenis-komoditas']);
     Route::resource('pasar', PasarController::class);
@@ -41,5 +48,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('perkembangan-harga', PerkembanganHargaController::class);
 
-    Route::resource('berita',BeritaController::class);
+    Route::resource('berita', ManajemenBeritaController::class)->parameters(['berita' => 'berita']);
 });
+
+
+
+// Auth
+require __DIR__ . '/auth.php';

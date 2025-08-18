@@ -9,7 +9,7 @@
 
 
             <div class="table-responsive">
-                <table id="basic-datatables" class="display table table-striped table-hover">
+                <table id="basic-datatables" class="display table table-hover">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -22,20 +22,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perkembanganHargas as $komoditas => $perkembanganHarga)
+                        @foreach ($perkembanganHargas as $perkembanganHarga)
+                            {{-- Row untuk nama komoditas --}}
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $perkembanganHarga->nama }}</td>
-                                <td>{{ $perkembanganHarga->jenis }}</td>
-                                <td>
-                                    @foreach ($perkembanganHarga->harga_monitorings as $monitorings)
-                                        <p>{{ $monitorings->pasar->nama }}</p>
-                                    @endforeach
+                                <td colspan="7" style="font-weight: bold; background: #b6b6b6;">
+                                    {{ $perkembanganHarga['komoditas'] }}
                                 </td>
-
                             </tr>
+
+                            {{-- Row untuk setiap harga monitoring --}}
+                            @foreach ($perkembanganHarga['harga_monitorings'] as $i => $monitoring)
+                                <tr>
+                                    <td>{{ $i + 1 }}</td>
+                                    <td>{{ $monitoring->komoditas->nama_komoditas }}</td>
+                                    <td>{{ $monitoring->pasar->nama }}</td>
+
+                                    <td>{{ $monitoring->tanggal }}</td>
+                                    <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
+                                    <td>{{ $monitoring->keterangan ?? '-' }}</td>
+                                    <td>
+                                        <div class="form-button-action gap-2">
+                                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+                                                title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <form action="" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-danger btn-sm deleteBtn"
+                                                    data-bs-toggle="tooltip" title="Delete">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>

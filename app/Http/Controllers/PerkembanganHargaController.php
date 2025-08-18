@@ -20,8 +20,24 @@ class PerkembanganHargaController extends Controller
 
         // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
 
-        $perkembangan = Komoditas::with(['harga_monitorings.pasar'])->whereHas('harga_monitorings')->get();
+        $perkembangan = Komoditas::with(['harga_monitorings.pasar','jenis_komoditas','harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function($perkembangan) {
+            return [
+                'komoditas' => $perkembangan->nama_komoditas,
+                'harga_monitorings' => $perkembangan->harga_monitorings
+            ];
+        });
+
+
+        // $dataPerkembangan = [];
+        // foreach ($perkembangan as $index => $komoditas) {
+        //     // $dataIndex = $index;
+        //     $dataPerkembangan[$komoditas->nama_komoditas] = $komoditas->harga_monitorings;
+
+        // }
+
+
         // dd($perkembangan);
+
         $data = [
 
             'title' => 'Perkembangan Harga',

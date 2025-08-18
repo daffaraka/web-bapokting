@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{$title ?? 'Bapokting'}}</title>
+    <title>{{ $title ?? 'Bapokting' }}</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
@@ -36,6 +36,9 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -51,17 +54,17 @@
                 <div class="page-inner">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
-                            <h3 class="fw-bold mb-3">{{$title}}</h3>
-                            <h6 class="op-7 mb-2">{{$description}}</h6>
+                            <h3 class="fw-bold mb-3">{{ $title }}</h3>
+                            <h6 class="op-7 mb-2">{{ $description }}</h6>
                         </div>
 
 
-                        @if(!empty($route_create))
+                        @if (!empty($route_create))
                             <div class="ms-md-auto py-2 py-md-0">
                                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-                                <a href="{{$route_create}}" class="btn btn-primary btn-round">Tambah {{$modul}}</a>
+                                <a href="{{ $route_create }}" class="btn btn-primary btn-round">Tambah
+                                    {{ $modul }}</a>
                             </div>
-
                         @endif
                     </div>
                     @yield('content')
@@ -166,6 +169,7 @@
 
     <!-- Kaiadmin JS -->
     <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     {{-- <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
@@ -174,7 +178,7 @@
 
     <script>
         $(document).ready(function() {
-            @if(session('success'))
+            @if (session('success'))
                 swal({
                     title: "Success!",
                     text: "{{ session('success') }}",
@@ -183,7 +187,7 @@
                 });
             @endif
 
-            @if(session('error'))
+            @if (session('error'))
                 swal({
                     title: "Error!",
                     text: "{{ session('error') }}",
