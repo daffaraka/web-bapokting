@@ -64,7 +64,7 @@ class FrontPageController extends Controller
             $labels->push(Carbon::create(null, $i, 1)->format('M'));
         }
 
-        $berita = Berita::where('status', 'publish')->get();
+        $berita = Berita::where('status_berita', 'publish')->get();
 
 
         $data = [

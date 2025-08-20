@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             PasarSeeder::class,
             HargaMonitoringSeeder::class,
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
+            BeritaSeeder::class
         ]);
     }
 }
