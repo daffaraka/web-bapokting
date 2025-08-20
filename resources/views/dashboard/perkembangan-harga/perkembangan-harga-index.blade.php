@@ -9,34 +9,27 @@
 
 
             <div class="table-responsive">
-                <table id="basic-datatables" class="display table table-hover">
+                <table id="basic-datatables" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
+                            <th>#</th>
                             <th>Nama Komoditas</th>
+                            <th>Jenis Komoditas</th>
                             <th>Nama Pasar</th>
                             <th>Tanggal</th>
                             <th>Harga</th>
-                            <th>Stok</th>
+                            <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perkembanganHargas as $perkembanganHarga)
-                            {{-- Row untuk nama komoditas --}}
-                            <tr>
-                                <td colspan="7" style="font-weight: bold; background: #b6b6b6;">
-                                    {{ $perkembanganHarga['komoditas'] }}
-                                </td>
-                            </tr>
-
-                            {{-- Row untuk setiap harga monitoring --}}
+                        @foreach ($perkembanganHargas as $k => $perkembanganHarga)
                             @foreach ($perkembanganHarga['harga_monitorings'] as $i => $monitoring)
                                 <tr>
-                                    <td>{{ $i + 1 }}</td>
-                                    <td>{{ $monitoring->komoditas->nama_komoditas }}</td>
+                                    <td>{{ $k + 1 . '.' . ($i + 1) }}</td>
+                                    <td>{{ $perkembanganHarga['komoditas'] }}</td> {{-- Komoditas langsung ditaruh di kolom --}}
+                                    <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                                     <td>{{ $monitoring->pasar->nama }}</td>
-
                                     <td>{{ $monitoring->tanggal }}</td>
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
                                     <td>{{ $monitoring->keterangan ?? '-' }}</td>
@@ -60,8 +53,8 @@
                             @endforeach
                         @endforeach
                     </tbody>
-
                 </table>
+
             </div>
         </div>
 
@@ -71,7 +64,19 @@
 
 @push('scripts')
     <script>
-        $("#basic-datatables").DataTable({});
+        $('#basic-datatables').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            columnDefs: [{
+                    orderable: false,
+                    targets: [7]
+                } // kolom Action tidak bisa sort
+            ],
+            rowGroup: {
+                dataSrc: 1 // kolom ke-2 → "Nama Komoditas"
+            }
+        });
         $(".deleteBtn").click(function(e) {
             e.preventDefault();
             var form = $(this).parents('form');

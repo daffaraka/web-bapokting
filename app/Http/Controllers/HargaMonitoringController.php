@@ -20,13 +20,13 @@ class HargaMonitoringController extends Controller
 
         $count = HargaMonitoring::count();
         $limit = $count > 5 ? 5 : $count;
-        $hargaMonitoring  = HargaMonitoring::with(['komoditas', 'pasar', 'user']);
+        $hargaMonitoring  = HargaMonitoring::with(['jenis_komoditas', 'pasar', 'user']);
 
-        $availKomoditas = $hargaMonitoring->clone()->distinct('komoditas_id')->get('komoditas_id','komoditas.nama');
+        $availKomoditas = $hargaMonitoring->clone()->distinct('jenis_komoditas_id')->get('jenis_komoditas_id','jenis_komoditas.nama_jenis');
 
-        // dd($availKomoditas);
+        // dd($availKomoditas[0]);
         $hargaMonitoringData = $hargaMonitoring->clone()->get()
-            ->groupBy('komoditas.nama')
+            ->groupBy('jenis_komoditas.nama_jenis')
             ->sortByDesc(function ($group) {
                 return $group->count();
             })->take($limit);

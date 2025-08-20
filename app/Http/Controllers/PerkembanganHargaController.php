@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
 use App\Models\HargaMonitoring;
+use App\Models\JenisKomoditas;
 
 class PerkembanganHargaController extends Controller
 {
@@ -20,12 +21,15 @@ class PerkembanganHargaController extends Controller
 
         // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
 
-        $perkembangan = Komoditas::with(['harga_monitorings.pasar','jenis_komoditas','harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function($perkembangan) {
+        $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar','komoditas','harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function($perkembangan) {
             return [
-                'komoditas' => $perkembangan->nama_komoditas,
-                'harga_monitorings' => $perkembangan->harga_monitorings
+                'komoditas' => $perkembangan->komoditas->nama_komoditas,
+                'harga_monitorings' => $perkembangan->harga_monitorings,
             ];
         });
+
+
+        // dd($perkembangan);
 
 
         // $dataPerkembangan = [];

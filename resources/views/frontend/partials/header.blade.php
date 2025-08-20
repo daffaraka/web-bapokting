@@ -1,4 +1,4 @@
-  <header id="header" class="header d-flex align-items-center fixed-top">
+  <header id="header" class="header d-flex align-items-center fixed-top {{ Route::currentRouteName() != 'frontpage' ? 'sticky-top' : ''}} ">
       <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
           <a href="/" class="logo d-flex align-items-center">
@@ -9,7 +9,9 @@
 
           <nav id="navmenu" class="navmenu">
               <ul>
-                  <li><a href="{{ route('frontpage') }}" class="active">Home</a></li>
+                  <li><a href="{{ route('frontpage') }}" class="{{ Route::is('frontpage') ? 'active' : ''}}">Home</a></li>
+
+                  <li><a href="{{ route('profil-bapokting') }}" class="{{ Route::is('profil-bapokting') ? 'active' : ''}}">Profil</a></li>
 
                   {{-- <li><a href="blog.html">Blog</a></li> --}}
                   <li class="dropdown"><a href="#"><span>Komoditas</span> <i

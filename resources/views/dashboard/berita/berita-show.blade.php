@@ -22,9 +22,13 @@
 
                     {{-- Gambar Berita --}}
                     @if ($berita->gambar_berita)
-                        <div class="mb-4 text-center">
-                            <img src="{{ asset('storage/' . $berita->gambar_berita) }}" alt="{{ $berita->judul_berita }}"
-                                class="img-fluid rounded shadow-sm">
+                        <div class="mb-4 text-left">
+                            <a href="{{ asset($berita->gambar_berita) }}" target="_blank">
+                                <img src="{{ asset($berita->gambar_berita) }}" alt="{{ $berita->judul_berita }}"
+                                    class="img-fluid border rounded w-25 shadow shadow-md">
+
+                            </a>
+
                         </div>
                     @endif
 
@@ -45,7 +49,7 @@
                     </div>
 
                     <div class="d-flex mt-3">
-                        <a href="{{route('berita.index')}}" class="btn btn-info">Kembali</a>
+                        <a href="{{ route('berita.index') }}" class="btn btn-info">Kembali</a>
                     </div>
                 </div>
             </div>

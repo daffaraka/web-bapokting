@@ -30,6 +30,7 @@ Route::prefix('komoditas')->group(function () {
     Route::get('/', [FrontPageController::class, 'komoditas'])->name('komoditas');
 });
 
+Route::get('profil-bapokting', [FrontPageController::class, 'profilBapokting'])->name('profil-bapokting');
 
 
 // Dashboard

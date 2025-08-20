@@ -45,10 +45,13 @@ class ManajemenBeritaController extends Controller
 
         $file = $request->file('gambar_berita');
         $fileName = $file->getClientOriginalName();
-        $time = now();
+        $time = now()->format('Y-m-d H-i-s');
         $fileName = $time . '-' . $fileName;
         $savedPath = $request->judul_berita . '-' . $fileName;
-        $file->move('public/berita', $savedPath);
+
+
+        // dd($savedPath);
+        $file->move('berita', $savedPath);
 
 
         $published_at = $request->status_berita == 'published' ? now() : null;
@@ -57,7 +60,7 @@ class ManajemenBeritaController extends Controller
             'judul_berita' => $request->judul_berita,
             'slug_berita' => $request->slug_berita,
             'konten_berita' => $request->konten_berita,
-            'gambar_berita' => 'public/berita/' . $savedPath,
+            'gambar_berita' => 'berita/' . $savedPath,
             'user_id' => Auth::user()->id,
             'status_berita' => $request->status_berita,
             'published_at' => $published_at,
@@ -99,15 +102,15 @@ class ManajemenBeritaController extends Controller
         if ($request->has('gambar_berita')) {
             $file = $request->file('gambar_berita');
             $fileName = $file->getClientOriginalName();
-            $time = now();
+            $time = now('Y-m-d H-i-s');
             $fileName = $time . '-' . $fileName;
             $savedPath = $request->judul_berita . '-' . $fileName;
 
-            if (File::exists('public/berita/' . $berita->gambar_berita)) {
-                File::delete('public/berita/' . $berita->gambar_berita);
-                $file->move('public/berita', $savedPath);
+            if (File::exists('berita/' . $berita->gambar_berita)) {
+                File::delete('berita/' . $berita->gambar_berita);
+                $file->move('berita', $savedPath);
             } else {
-                $file->move('public/berita', $savedPath);
+                $file->move('berita', $savedPath);
             }
         } else {
             $savedPath = $berita->gambar_berita;

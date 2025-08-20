@@ -22,9 +22,9 @@ class HargaMonitoring extends Model
         return $this->belongsTo(Pasar::class);
     }
 
-    public function komoditas()
+    public function jenis_komoditas()
     {
-        return $this->belongsTo(Komoditas::class);
+        return $this->belongsTo(JenisKomoditas::class);
     }
 
     public function user()

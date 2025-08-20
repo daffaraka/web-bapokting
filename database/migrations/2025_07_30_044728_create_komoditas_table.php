@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('komoditas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_komoditas');
+            $table->enum('type_komoditas', ['Penting', 'Pokok'])->default('Pokok');
             $table->timestamps();
         });
     }

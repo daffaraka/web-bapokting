@@ -48,6 +48,11 @@ class KomoditasSeeder extends Seeder
             'Ikan lele',
         ];
 
+        $typeKomoditas = [
+            'Penting',
+            'Pokok',
+        ];
+
 
 
 
@@ -57,6 +62,7 @@ class KomoditasSeeder extends Seeder
         for ($i = 0; $i < count($komoditas); $i++) {
             Komoditas::create([
                 'nama_komoditas' => $komoditas[$i],
+                'type_komoditas' => $typeKomoditas[array_rand($typeKomoditas)],
             ]);
         }
     }

@@ -13,6 +13,7 @@ class Komoditas extends Model
     protected $table = 'komoditas';
     protected $fillable = [
         'nama_komoditas',
+        'type_komoditas',
     ];
 
 

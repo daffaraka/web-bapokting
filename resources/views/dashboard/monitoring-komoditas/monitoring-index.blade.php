@@ -14,7 +14,7 @@
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
                                 id="komoditas{{ $item->komoditas_id }}">
                             <label class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
-                                {{ $item->komoditas->nama }}
+                                {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
                     @endforeach
@@ -25,7 +25,7 @@
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
                                 id="komoditas{{ $item->komoditas_id }}">
                             <label class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
-                                {{ $item->komoditas->nama }}
+                                {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
                     @endforeach
@@ -36,7 +36,7 @@
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
                                 id="komoditas{{ $item->komoditas_id }}">
                             <label class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
-                                {{ $item->komoditas->nama }}
+                                {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
                     @endforeach
@@ -47,7 +47,7 @@
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
                                 id="komoditas{{ $item->komoditas_id }}">
                             <label class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
-                                {{ $item->komoditas->nama }}
+                                {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
                     @endforeach
