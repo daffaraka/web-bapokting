@@ -81,7 +81,8 @@ class UPTDController extends Controller
     public function edit(UPTD $uptd)
     {
         $data = [
-            'uptd' => $uptd,
+            'uptd' => $uptd->load('pasars'),
+            'pasar' => Pasar::all(),
             'title' => 'Edit UPTD',
             'description' => 'Halaman ini digunakan untuk mengedit data UPTD yang sudah ada'
         ];
@@ -93,6 +94,8 @@ class UPTDController extends Controller
      */
     public function update(Request $request, UPTD $uptd)
     {
+
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'nama' => 'required|max:255'
         ], [
@@ -109,6 +112,15 @@ class UPTDController extends Controller
         $uptd->update([
             'nama' => $request->nama
         ]);
+
+        $uptd->pasars()->delete();
+
+
+        for ($i = 1; $i <= count($request->pasar_id); $i++) {
+            $uptd->pasars()->create([
+                'pasar_id' => $request->pasar_id[$i]
+            ]);
+        }
 
         return redirect()->route('uptd.index')->with('success', 'Data UPTD berhasil diupdate');
     }

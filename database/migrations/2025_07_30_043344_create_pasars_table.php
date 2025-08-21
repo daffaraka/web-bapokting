@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pasars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uptd_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('uptd_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->string('nama');
             $table->string('lokasi')->nullable();
             $table->timestamps();

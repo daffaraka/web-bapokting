@@ -17,7 +17,7 @@ class UPTD extends Model
 
     public function pasars()
     {
-        return $this->hasMany(Pasar::class);
+        return $this->hasMany(Pasar::class, 'uptd_id');
     }
 
     public function users()
