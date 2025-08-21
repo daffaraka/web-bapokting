@@ -90,7 +90,7 @@ class JenisKomoditasController extends Controller
     {
         $data = [
             'komoditas' => $jenisKomoditas,
-            'title' => 'Detail Komoditas',
+            'title' => 'Detail Jenis Komoditas',
             'description' => 'Halaman ini menampilkan detail data komoditas yang dipilih'
         ];
         return view('dashboard.jenis-komoditas.jenis-komoditas-show', $data);
@@ -103,7 +103,7 @@ class JenisKomoditasController extends Controller
     {
         $data = [
             'komoditas' => $jenisKomoditas,
-            'title' => 'Edit Komoditas',
+            'title' => 'Edit Jenis Komoditas',
             'description' => 'Halaman ini digunakan untuk mengedit data jenis komoditas yang sudah ada',
             'komoditas' => Komoditas::all(),
             'jenisKomoditas' => $jenisKomoditas

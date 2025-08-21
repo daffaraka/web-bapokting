@@ -64,7 +64,7 @@ class FrontPageController extends Controller
             $labels->push(Carbon::create(null, $i, 1)->format('M'));
         }
 
-        $berita = Berita::where('status_berita', 'publish')->get();
+        $berita = Berita::where('status_berita', 'published')->limit(6)->get();
 
 
         $data = [
@@ -73,7 +73,13 @@ class FrontPageController extends Controller
             'labels' => $labels,
             'datasets' => $datasets,
         ];
-        return view('frontend.index');
+        return view('frontend.index', $data);
+    }
+
+    public function showBerita($id) {
+        $berita = Berita::find($id);
+
+        return view('frontend.show-berita',compact('berita'));
     }
 
     public function profilBapokting()

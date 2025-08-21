@@ -26,6 +26,7 @@ Route::view('base-layout', 'dashboard.layouts.base-view');
 // Front page
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
 Route::get('/berita', [FrontPageController::class, 'berita'])->name('berita');
+Route::get('/berita/{id}', [FrontPageController::class, 'showBerita'])->name('frontpage.berita.show');
 Route::prefix('komoditas')->group(function () {
     Route::get('/', [FrontPageController::class, 'komoditas'])->name('komoditas');
 });
