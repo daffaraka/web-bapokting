@@ -61,11 +61,11 @@
                                 </td>
                                 <td>
                                     <div class="form-button-action gap-2">
-                                        <a href="{{ route('komoditas.edit', $komoditas->id) }}" class="btn btn-primary "
+                                        <a href="{{ route('jenis-komoditas.edit', $komoditas->id) }}" class="btn btn-primary "
                                             data-bs-toggle="tooltip" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('komoditas.destroy', $komoditas->id) }}" method="POST"
+                                        <form action="{{ route('jenis-komoditas.destroy', $komoditas->id) }}" method="POST"
                                             style="display:inline;" id="form_delete">
                                             @csrf
                                             @method('DELETE')

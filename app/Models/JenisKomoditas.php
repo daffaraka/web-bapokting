@@ -12,6 +12,8 @@ class JenisKomoditas extends Model
         'nama_jenis',
         'harga',
         'satuan',
+        'komoditas_id',
+        'type_komoditas'
 
     ];
 

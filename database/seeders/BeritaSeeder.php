@@ -18,6 +18,8 @@ class BeritaSeeder extends Seeder
     {
         $faker = FakerFactory::create('id_ID');
 
+        $gambarBerita = array_diff(scandir(public_path('berita')), ['..', '.']);
+
         $user = User::all()->pluck('id')->toArray();
 
         for ($i = 1; $i <= 10; $i++) {
@@ -42,7 +44,7 @@ class BeritaSeeder extends Seeder
                 'judul_berita'  => $judul,
                 'slug_berita'   => Str::slug($judul),
                 'konten_berita' => $konten,
-                'gambar_berita' => "gambar$i.jpg",
+                'gambar_berita' => 'berita/'.$gambarBerita[array_rand($gambarBerita)],
                 'user_id'       => $user[array_rand($user)],
                 'status_berita' => $status,
                 'published_at'  => $status === 'published'

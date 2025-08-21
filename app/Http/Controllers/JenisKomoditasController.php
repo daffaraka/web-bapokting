@@ -23,7 +23,7 @@ class JenisKomoditasController extends Controller
     public function index()
     {
         $data = [
-            'komoditas' => JenisKomoditas::with('komoditas')->get(),
+            'komoditas' => JenisKomoditas::with('komoditas')->latest()->get(),
             'title' => 'Data Jenis Komoditas',
             'description' => 'Halaman ini menampilkan data jenis komoditas yang ada di dalam database',
             'route_create' => $this->routeCreate,
@@ -53,30 +53,34 @@ class JenisKomoditasController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_jenis' => 'required|max:255',
             'harga' => 'required|numeric',
-            'satuan' => 'required|max:255'
+            'satuan' => 'required|max:255',
+            'type_komoditas' => 'required|in:penting,pokok',
+            'komoditas_id' => 'required|exists:komoditas,id'
         ], [
             'nama_jenis.required' => 'Nama Jenis wajib diisi.',
             'nama_jenis.max' => 'Nama Jenis tidak boleh lebih dari 255 karakter.',
             'harga.required' => 'Harga wajib diisi.',
             'harga.numeric' => 'Harga harus berupa angka.',
             'satuan.required' => 'Satuan wajib diisi.',
-            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.'
+            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.',
+            'type_komoditas.in' => 'Type komoditas harus diisi dengan peting atau pokok.',
+            'komoditas_id.exists' => 'Komoditas tidak ditemukan.',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('komoditas.create')
+            return redirect()->route('jenis-komoditas.create')
                 ->withErrors($validator)
                 ->withInput();
         }
 
         JenisKomoditas::create([
-            'nama' => $request->nama,
-            'nama_jenis' => $request->jenis,
+            'nama_jenis' => $request->nama_jenis,
+            'komoditas_id' => $request->komoditas_id,
             'harga' => $request->harga,
             'satuan' => $request->satuan
         ]);
 
-        return redirect()->route('komoditas.index')->with('success', 'Data komoditas berhasil ditambahkan');
+        return redirect()->route('jenis-komoditas.index')->with('success', 'Data komoditas berhasil ditambahkan');
     }
 
     /**
@@ -101,7 +105,8 @@ class JenisKomoditasController extends Controller
             'komoditas' => $jenisKomoditas,
             'title' => 'Edit Komoditas',
             'description' => 'Halaman ini digunakan untuk mengedit data jenis komoditas yang sudah ada',
-            'komoditas' => Komoditas::all()
+            'komoditas' => Komoditas::all(),
+            'jenisKomoditas' => $jenisKomoditas
 
         ];
         return view('dashboard.jenis-komoditas.jenis-komoditas-edit', $data);
@@ -112,6 +117,7 @@ class JenisKomoditasController extends Controller
      */
     public function update(Request $request, JenisKomoditas $jenisKomoditas)
     {
+
         $validator = Validator::make($request->all(), [
             'nama_jenis' => 'required|max:255',
             'harga' => 'required|numeric',
@@ -122,23 +128,25 @@ class JenisKomoditasController extends Controller
             'harga.required' => 'Harga wajib diisi.',
             'harga.numeric' => 'Harga harus berupa angka.',
             'satuan.required' => 'Satuan wajib diisi.',
-            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.'
+            'satuan.max' => 'Satuan tidak boleh lebih dari 255 karakter.',
+             'type_komoditas.in' => 'Type komoditas harus diisi dengan peting atau pokok.',
+            'komoditas_id.exists' => 'Komoditas tidak ditemukan.',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('komoditas.edit', $jenisKomoditas->id)
+            return redirect()->route('jenis-komoditas.edit', $jenisKomoditas->id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
         $jenisKomoditas->update([
-            'nama' => $request->nama,
-            'nama_jenis' => $request->jenis,
+            'nama_jenis' => $request->nama_jenis,
+            'komoditas_id' => $request->komoditas_id,
             'harga' => $request->harga,
             'satuan' => $request->satuan
         ]);
 
-        return redirect()->route('komoditas.index')->with('success', 'Data komoditas berhasil diupdate');
+        return redirect()->route('jenis-komoditas.index')->with('success', 'Data komoditas berhasil diupdate');
     }
 
     /**
@@ -146,8 +154,8 @@ class JenisKomoditasController extends Controller
      */
     public function destroy(JenisKomoditas $jenisKomoditas)
     {
-        $oldKomoditas = $jenisKomoditas->nama;
+        $oldKomoditas = $jenisKomoditas->nama_jenis;
         $jenisKomoditas->delete();
-        return redirect()->route('komoditas.index')->with('success', 'Data komoditas : ' . $oldKomoditas . ' berhasil dihapus');
+        return redirect()->route('jenis-komoditas.index')->with('success', 'Data komoditas : ' . $oldKomoditas . ' berhasil dihapus');
     }
 }
