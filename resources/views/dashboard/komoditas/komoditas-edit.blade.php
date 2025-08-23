@@ -9,11 +9,11 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama"
-                        class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $komoditas->nama) }}"
+                    <label for="nama_komoditas">Nama Komoditas</label>
+                    <input type="text" name="nama_komoditas" id="nama_komoditas"
+                        class="form-control @error('nama_komoditas') is-invalid @enderror" value="{{ old('nama_komoditas', $komoditas->nama_komoditas) }}"
                         required>
-                    @error('nama')
+                    @error('nama_komoditas')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

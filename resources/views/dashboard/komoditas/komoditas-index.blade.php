@@ -50,58 +50,46 @@
 
 @push('scripts')
     <script>
-        $("#basic-datatables").DataTable({});
+        const registerDeleteItemHandlers = () => {
+            $(".deleteBtn").click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                swal({
+                    title: 'Anda yakin?',
+                    text: "Data tidak dapat dikembalikan!",
+                    type: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: "Ya, hapus!",
+                            className: "btn btn-success",
+                        },
+                        cancel: {
+                            visible: true,
+                            className: "btn btn-danger",
+                        },
+                    },
+                }).then((hapus) => {
+                    if (hapus) {
+                        form.submit();
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
 
-        $(".deleteBtn").click(function(e) {
-            e.preventDefault();
-            var form = $(this).parents('form');
-            swal({
-                title: 'Anda yakin?',
-                text: "Data tidak dapat dikembalikan!",
-                type: 'warning',
-                buttons: {
-                    confirm: {
-                        text: "Ya, hapus!",
-                        className: "btn btn-success",
-                    },
-                    cancel: {
-                        visible: true,
-                        className: "btn btn-danger",
-                    },
-                },
-            }).then((hapus) => {
-                if (hapus) {
-                    form.submit();
-                } else {
-                    swal.close();
-                }
-            });
-        })
 
-        $(".deleteBtn").click(function(e) {
-            e.preventDefault();
-            var form = $(this).parents('form');
-            swal({
-                title: 'Anda yakin?',
-                text: "Data tidak dapat dikembalikan!",
-                type: 'warning',
-                buttons: {
-                    confirm: {
-                        text: "Ya, hapus!",
-                        className: "btn btn-success",
-                    },
-                    cancel: {
-                        visible: true,
-                        className: "btn btn-danger",
-                    },
-                },
-            }).then((hapus) => {
-                if (hapus) {
-                    form.submit();
-                } else {
-                    swal.close();
-                }
-            });
-        })
+
+
+
+        };
+
+        registerDeleteItemHandlers();
+
+
+        $("#basic-datatables")
+            .DataTable({})
+            .on("draw.dt", function() {
+                registerDeleteItemHandlers();
+            });;
     </script>
 @endpush

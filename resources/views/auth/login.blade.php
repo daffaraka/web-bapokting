@@ -17,7 +17,7 @@
 
 <body>
     <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('{{ asset('assets/login/images/bg_1.jpg') }}');"></div>
+        <div class="bg" style="background-color:#2a2c39;"></div>
         <div class="contents">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
@@ -48,7 +48,7 @@
                                     <span class="ml-auto"><a href="{{ route('password.request') }}"
                                             class="forgot-pass">Forgot Password</a></span>
                                 </div>
-                                <input type="submit" value="Log In" class="btn btn-block py-2 btn-primary">
+                                <input type="submit" value="Log In" class="btn btn-block py-2 text-white" style="background-color: #2a2c39;">
                                 {{-- <span class="text-center my-3 d-block">or</span>
                                 <div class="">
                                     <a href="#" class="btn btn-block py-2 btn-facebook">

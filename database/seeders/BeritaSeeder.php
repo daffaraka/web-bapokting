@@ -22,7 +22,7 @@ class BeritaSeeder extends Seeder
 
         $user = User::all()->pluck('id')->toArray();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             $status = $faker->boolean() ? 'draft' : 'published';
             $judul  = $faker->sentence(6);
 

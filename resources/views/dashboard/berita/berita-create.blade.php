@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="konten_berita">Konten Berita</label>
                     <textarea name="konten_berita" id="konten_berita" cols="30" rows="10"
-                        class="form-control @error('konten_berita') is-invalid @enderror" >{{ old('konten_berita') }}</textarea>
+                        class="form-control @error('konten_berita') is-invalid @enderror">{{ old('konten_berita') }}</textarea>
                     @error('konten_berita')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -36,7 +36,8 @@
                 <div class="form-group">
                     <label for="gambar_berita">Gambar Berita</label>
                     <input type="file" name="gambar_berita" id="gambar_berita" accept="image/*"
-                        class="form-control @error('gambar_berita') is-invalid @enderror" value="{{ old('gambar_berita') }}">
+                        class="form-control @error('gambar_berita') is-invalid @enderror"
+                        value="{{ old('gambar_berita') }}">
                     @error('gambar_berita')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -90,5 +91,25 @@
                 .catch(error => {
                     console.error(error);
                 });
+
+
+
+            const gambarBerita = document.getElementById('gambar_berita');
+            const preview = document.getElementById('preview');
+
+            gambarBerita.addEventListener('change', function() {
+                const file = gambarBerita.files[0];
+                const reader = new FileReader();
+
+                reader.onloadend = function() {
+                    preview.src = reader.result;
+                }
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "";
+                }
+            });
         </script>
     @endpush

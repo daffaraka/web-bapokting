@@ -115,7 +115,7 @@ class KomoditasController extends Controller
         }
 
         $komoditas->update([
-            'nama_komoditas' => $request->nama,
+            'nama_komoditas' => $request->nama_komoditas,
         ]);
 
         return redirect()->route('komoditas.index')->with('success', 'Data komoditas berhasil diupdate');
@@ -126,7 +126,7 @@ class KomoditasController extends Controller
      */
     public function destroy(Komoditas $komoditas)
     {
-        $oldKomoditas = $komoditas->nama;
+        $oldKomoditas = $komoditas->nama_komoditas;
         $komoditas->delete();
         return redirect()->route('komoditas.index')->with('success', 'Data komoditas : ' . $oldKomoditas . ' berhasil dihapus');
     }

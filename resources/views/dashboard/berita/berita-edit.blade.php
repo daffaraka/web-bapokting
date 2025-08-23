@@ -46,8 +46,8 @@
                         <label for="gambar_berita">Gambar Berita</label>
                         @if ($berita->gambar_berita)
                             <div class="mb-2">
-                                <img src="{{ asset('storage/' . $berita->gambar_berita) }}" alt="Current Image"
-                                    class="img-thumbnail" width="200">
+                                <img src="{{ asset($berita->gambar_berita) }}" alt="Current Image" class="img-thumbnail"
+                                    width="200" id="preview">
                             </div>
                         @endif
                         <input type="file" name="gambar_berita" id="gambar_berita"
@@ -115,5 +115,24 @@
             .catch(error => {
                 console.error(error);
             });
+
+
+        const gambarBerita = document.getElementById('gambar_berita');
+        const preview = document.getElementById('preview');
+
+        gambarBerita.addEventListener('change', function() {
+            const file = gambarBerita.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        });
     </script>
 @endpush

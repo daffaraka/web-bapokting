@@ -95,14 +95,13 @@ class ManajemenBeritaController extends Controller
     public function update(Request $request, Berita $berita)
     {
 
-        dd($request->all());
         $published_at = $request->status_berita == 'published' ? now() : $berita->published_at;
 
 
         if ($request->has('gambar_berita')) {
             $file = $request->file('gambar_berita');
             $fileName = $file->getClientOriginalName();
-            $time = now('Y-m-d H-i-s');
+            $time = now()->format('Y-m-d H-i-s');
             $fileName = $time . '-' . $fileName;
             $savedPath = $request->judul_berita . '-' . $fileName;
 
@@ -121,7 +120,7 @@ class ManajemenBeritaController extends Controller
             'judul_berita' => $request->judul_berita,
             'slug_berita' => $request->slug_berita,
             'konten_berita' => $request->konten_berita,
-            'gambar_berita' => $savedPath,
+            'gambar_berita' => 'berita/'.$savedPath,
             'user_id' => Auth::user()->id,
             'status_berita' => $request->status_berita,
             'published_at_berita' => $published_at,
@@ -137,7 +136,7 @@ class ManajemenBeritaController extends Controller
     {
         $berita->delete();
 
-        return redirect()->route('berita.berita-index')
+        return redirect()->route('berita.index')
             ->with('success', 'Berita deleted successfully');
     }
 }
