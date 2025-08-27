@@ -8,6 +8,13 @@
 
 
 
+            <div class="d-flex justify-content-end gap-3 mb-4">
+                    <a href="" class="btn btn-success"><i class="fas fa-file-excel"></i> Download Excel</a>
+                    <a href="" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Download PDF</a>
+            </div>
+
+
+
             <div class="table-responsive">
                 <table id="basic-datatables" class="table table-bordered">
                     <thead>
@@ -16,9 +23,9 @@
                             <th>Nama Komoditas</th>
                             <th>Jenis Komoditas</th>
                             <th>Nama Pasar</th>
+                            <th>UPTD</th>
                             <th>Tanggal</th>
                             <th>Harga</th>
-                            <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,9 +37,9 @@
                                     <td>{{ $perkembanganHarga['komoditas'] }}</td> {{-- Komoditas langsung ditaruh di kolom --}}
                                     <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                                     <td>{{ $monitoring->pasar->nama }}</td>
-                                    <td>{{ $monitoring->tanggal }}</td>
+                                    <td>{{ $monitoring->pasar->uptd->nama }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY'); }}</td>
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
-                                    <td>{{ $monitoring->keterangan ?? '-' }}</td>
                                     <td>
                                         <div class="form-button-action gap-2">
                                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"

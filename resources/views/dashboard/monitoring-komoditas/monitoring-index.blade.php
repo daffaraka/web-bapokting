@@ -110,7 +110,7 @@
 @push('scripts')
     <script>
         $("#basic-datatables").DataTable({});
-$(".deleteBtn").click(function(e) {
+        $(".deleteBtn").click(function(e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({

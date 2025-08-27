@@ -22,19 +22,22 @@ class FrontPageController extends Controller
             ->sortByDesc(function ($group) {
                 return $group->count();
             })->take($limit);
-        // ->values();
 
-        // dd($hargaMonitoring);
+
+
 
 
 
         $datasets = [];
         $primaryColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+        $colorIndex = 0;
 
         foreach ($hargaMonitoringData as $komoditas => $dataGroup) {
             $sorted = $dataGroup->sortBy('tanggal');
-            $colorIndex = array_rand($primaryColors);
             $color = $primaryColors[$colorIndex];
+            $colorIndex = ($colorIndex + 1) % count($primaryColors);
+
+
 
             $datasets[] = [
                 'label' => $komoditas,
@@ -45,16 +48,16 @@ class FrontPageController extends Controller
                 'pointHoverRadius' => 4,
                 'pointHoverBorderWidth' => 1,
                 'pointRadius' => 4,
-                'backgroundColor' => 'transparent',
+                'backgroundColor' => 'rgba(0,0,0,0.05)',
                 'fill' => true,
                 'borderWidth' => 2,
                 'data' => $sorted->pluck('harga')->values(),
             ];
         }
 
+        //  dd($sorted->values()->get(0));
 
 
-        // Ambil labels dari tanggal
 
         $bulanTerakhir = $hargaMonitoringData->flatten()->max('tanggal');
         $bulanTerakhirCarbon = Carbon::parse($bulanTerakhir);
@@ -63,6 +66,8 @@ class FrontPageController extends Controller
         for ($i = 1; $i <= $bulanTerakhirCarbon->month; $i++) {
             $labels->push(Carbon::create(null, $i, 1)->format('M'));
         }
+
+
 
         $berita = Berita::where('status_berita', 'published')->limit(6)->get();
 
@@ -76,10 +81,11 @@ class FrontPageController extends Controller
         return view('frontend.index', $data);
     }
 
-    public function showBerita($id) {
+    public function showBerita($id)
+    {
         $berita = Berita::find($id);
 
-        return view('frontend.show-berita',compact('berita'));
+        return view('frontend.show-berita', compact('berita'));
     }
 
     public function profilBapokting()

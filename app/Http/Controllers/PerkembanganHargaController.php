@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UPTD;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
-use App\Models\HargaMonitoring;
+use Maatwebsite\Excel\Excel;
 use App\Models\JenisKomoditas;
+use App\Models\HargaMonitoring;
+use App\Exports\PerkembanganHargaExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PerkembanganHargaController extends Controller
 {
@@ -21,26 +25,15 @@ class PerkembanganHargaController extends Controller
 
         // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
 
-        $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar','komoditas','harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function($perkembangan) {
+        $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
             return [
                 'komoditas' => $perkembangan->komoditas->nama_komoditas,
                 'harga_monitorings' => $perkembangan->harga_monitorings,
             ];
         });
 
+        $uptd = UPTD::select('id', 'nama')->get();
 
-        // dd($perkembangan);
-
-
-        // $dataPerkembangan = [];
-        // foreach ($perkembangan as $index => $komoditas) {
-        //     // $dataIndex = $index;
-        //     $dataPerkembangan[$komoditas->nama_komoditas] = $komoditas->harga_monitorings;
-
-        // }
-
-
-        // dd($perkembangan);
 
         $data = [
 
@@ -98,5 +91,25 @@ class PerkembanganHargaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function exports()
+    {
+        return Excel::download(new PerkembanganHargaExport, 'perkembangan-harga.xlsx');
+    }
+
+    public function print()
+    {
+        $data = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
+            return [
+                'komoditas' => $perkembangan->komoditas->nama_komoditas,
+                'harga_monitorings' => $perkembangan->harga_monitorings,
+            ];
+        });
+
+        $pdf = Pdf::loadView('dashboard.perkembangan-harga.perkembangan-harga-print', compact('data'));
+
+        return $pdf->download('perkembangan-harga.pdf');
     }
 }

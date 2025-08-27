@@ -55,36 +55,15 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>About</h2>
-                <p>Who we are</p>
+                <h2>Riwayat</h2>
+                <p>Data Perkembangan Harga</p>
             </div><!-- End Section Title -->
 
             <div class="container">
 
                 <div class="row gy-4">
-
-                    <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
-                        </p>
-                        <ul>
-                            <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</span></li>
-                            <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in
-                                    voluptate velit.</span></li>
-                            <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea
-                                    commodo</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum. </p>
-                        <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                    <div class="chart-container">
+                        <canvas id="multipleLineChart" style="height: 500px;"></canvas>
                     </div>
 
                 </div>
@@ -111,14 +90,14 @@
                             <article>
 
                                 <div class="post-img">
-                                    <img src="{{ $b->gambar_berita ? asset($b->gambar_berita) : asset('frontpage/assets/img/blog/blog-1.jpg') }}" alt=""
-                                        class="img-fluid" style="width: 100%; max-height:300px;">
+                                    <img src="{{ $b->gambar_berita ? asset($b->gambar_berita) : asset('frontpage/assets/img/blog/blog-1.jpg') }}"
+                                        alt="" class="img-fluid" style="width: 100%; max-height:300px;">
                                 </div>
 
                                 <p class="post-category">{{ $b->status_berita }}</p>
 
                                 <h2 class="title">
-                                    <a href="{{route('frontpage.berita.show',$b->id)}}">{{ $b->judul_berita }}</a>
+                                    <a href="{{ route('frontpage.berita.show', $b->id) }}">{{ $b->judul_berita }}</a>
                                 </h2>
 
                                 <div class="d-flex align-items-center">
@@ -334,7 +313,14 @@
                             yang berbeda-beda dalam menjalankan tugas pokok dan fungsi Bapokting.</p>
                     </div>
                     <div class="col-xl-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="#">Call To Action</a>
+                        <a class="cta-btn align-middle" href="#struktur-bapokting">Lihat Struktur</a>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="call-to-action-image">
+                            <img src="{{ asset('assets/img/struktur bapokting.jpg') }}" alt=""
+                                class="img-fluid rounded " id="struktur-bapokting">
+                        </div>
                     </div>
                 </div>
 
@@ -342,7 +328,7 @@
 
         </section><!-- /Call To Action Section -->
 
-        <!-- Services Section -->
+        {{-- <!-- Services Section -->
         <section id="services" class="services section">
 
             <!-- Section Title -->
@@ -437,7 +423,7 @@
 
             </div>
 
-        </section><!-- /Services Section -->
+        </section><!-- /Services Section --> --}}
 
         <!-- Recent Posts Section -->
 
@@ -573,7 +559,45 @@
     <script src="{{ asset('frontpage/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
+
+
+    <script>
+        var multipleLineChart = document.getElementById("multipleLineChart").getContext("2d");
+
+        var myMultipleLineChart = new Chart(multipleLineChart, {
+            type: "line",
+            data: {
+                labels: {!! json_encode($labels) !!}, // Misal: ['Jan', 'Feb', ...]
+                datasets: {!! json_encode($datasets) !!}
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: "top",
+                },
+                tooltips: {
+                    bodySpacing: 4,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest",
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10,
+                },
+                layout: {
+                    padding: {
+                        left: 15,
+                        right: 15,
+                        top: 15,
+                        bottom: 15
+                    },
+                },
+            },
+        });
+    </script>
     @stack('scripts')
 </body>
 
