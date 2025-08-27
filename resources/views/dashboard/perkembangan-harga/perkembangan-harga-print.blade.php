@@ -37,8 +37,9 @@
         }
 
         table th {
-            background-color: #f2f2f2;
+            background-color: #cfcccc;
             text-align: center;
+            font-weight: bold;
         }
 
         .text-center {
@@ -59,10 +60,10 @@
     <div class="subtitle">Dinas Perdagangan - Bapokting</div>
 
     <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th class="text-center" style="width: 30px;">#</th>
+        <table border="1">
+            <thead >
+                <tr >
+                    <th style="width: 30px;">#</th>
                     <th>Nama Komoditas</th>
                     <th>Jenis Komoditas</th>
                     <th>Nama Pasar</th>
@@ -73,9 +74,12 @@
             </thead>
             <tbody>
                 @foreach ($perkembanganHargas as $k => $perkembanganHarga)
+                    <tr style="background-color: #ecea68; font-weight: bold;">
+                        <td colspan="7">{{ $perkembanganHarga['komoditas'] }}</td>
+                    </tr>
                     @foreach ($perkembanganHarga['harga_monitorings'] as $i => $monitoring)
                         <tr>
-                            <td class="text-center">{{ $k + 1 . '.' . ($i + 1) }}</td>
+                            <td>{{ $k + 1 . '.' . ($i + 1) }}</td>
                             <td>{{ $perkembanganHarga['komoditas'] }}</td>
                             <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                             <td>{{ $monitoring->pasar->nama }}</td>
@@ -88,6 +92,7 @@
                 @endforeach
             </tbody>
         </table>
+
     </div>
 
     <div class="footer">

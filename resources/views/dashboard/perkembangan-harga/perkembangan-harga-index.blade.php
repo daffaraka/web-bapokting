@@ -9,8 +9,10 @@
 
 
             <div class="d-flex justify-content-end gap-3 mb-4">
-                    <a href="" class="btn btn-success"><i class="fas fa-file-excel"></i> Download Excel</a>
-                    <a href="" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                <a href="{{ route('perkembangan-harga.export') }}" class="btn btn-success"><i class="fas fa-file-excel"></i>
+                    Download Excel</a>
+                <a href="{{ route('perkembangan-harga.print') }}" class="btn btn-danger"><i class="fas fa-file-pdf"></i>
+                    Download PDF</a>
             </div>
 
 
@@ -38,7 +40,8 @@
                                     <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                                     <td>{{ $monitoring->pasar->nama }}</td>
                                     <td>{{ $monitoring->pasar->uptd->nama }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY'); }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}
+                                    </td>
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="form-button-action gap-2">

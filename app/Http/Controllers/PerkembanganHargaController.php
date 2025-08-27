@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\UPTD;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Excel;
 use App\Models\JenisKomoditas;
 use App\Models\HargaMonitoring;
-use App\Exports\PerkembanganHargaExport;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PerkembanganHargaExport;
 
 class PerkembanganHargaController extends Controller
 {
@@ -94,22 +95,23 @@ class PerkembanganHargaController extends Controller
     }
 
 
-    public function exports()
+    public function export()
     {
-        return Excel::download(new PerkembanganHargaExport, 'perkembangan-harga.xlsx');
+        $fileName = 'perkembangan-harga-' . Carbon::now()->format('Y-m-d_H-i-s') . '.xlsx';
+        return Excel::download(new PerkembanganHargaExport, $fileName);
     }
 
     public function print()
     {
-        $data = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
+        $perkembanganHargas = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
             return [
                 'komoditas' => $perkembangan->komoditas->nama_komoditas,
                 'harga_monitorings' => $perkembangan->harga_monitorings,
             ];
         });
 
-        $pdf = Pdf::loadView('dashboard.perkembangan-harga.perkembangan-harga-print', compact('data'));
+        $pdf = Pdf::loadView('dashboard.perkembangan-harga.perkembangan-harga-print', compact('perkembanganHargas'));
 
-        return $pdf->download('perkembangan-harga.pdf');
+        return $pdf->download('perkembangan-harga-' . Carbon::now()->format('Y-m-d_H-i-s') . '.pdf');
     }
 }
