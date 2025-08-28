@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UPTD;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -37,8 +38,11 @@ class KomoditasController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Tambah Komoditas',
-            'description' => 'Halaman ini digunakan untuk menambahkan data komoditas yang baru'
+            'title' => 'Tambah Perkembangan Harga Jenis Komoditas',
+            'description' => 'Halaman ini digunakan untuk menambahkan data komoditas yang baru',
+            'komoditas' => Komoditas::all(),
+            'uptd' => UPTD::all(),
+
         ];
         return view('dashboard.komoditas.komoditas-create', $data);
     }
@@ -129,5 +133,12 @@ class KomoditasController extends Controller
         $oldKomoditas = $komoditas->nama_komoditas;
         $komoditas->delete();
         return redirect()->route('komoditas.index')->with('success', 'Data komoditas : ' . $oldKomoditas . ' berhasil dihapus');
+    }
+
+
+    public function getJenisKomoditas($id)
+    {
+        $komoditas = Komoditas::find($id);
+        return response()->json($komoditas->jenis_komoditas);
     }
 }

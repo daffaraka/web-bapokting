@@ -48,6 +48,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     // Route::resource('user', UserController::class);
     Route::resource('harga-monitoring', HargaMonitoringController::class);
 
+    Route::post('perkembangan-harga/download-file', [PerkembanganHargaController::class,'downloadFile'])->name('perkembangan-harga.download-file');
     Route::get('perkembangan-harga/export',[PerkembanganHargaController::class,'export'])->name('perkembangan-harga.export');
     Route::get('perkembangan-harga/print',[PerkembanganHargaController::class,'print'])->name('perkembangan-harga.print');
     Route::resource('perkembangan-harga', PerkembanganHargaController::class);

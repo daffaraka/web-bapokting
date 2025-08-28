@@ -14,16 +14,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class PerkembanganHargaExport implements ShouldAutoSize, FromView, WithStyles
 {
+
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
     public function view(): View
     {
-        $perkembanganHargas = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
-            return [
-                'komoditas' => $perkembangan->komoditas->nama_komoditas,
-                'harga_monitorings' => $perkembangan->harga_monitorings,
-            ];
-        });
-
-        return view('dashboard.perkembangan-harga.perkembangan-harga-print', compact('perkembanganHargas'));
+        return view('dashboard.perkembangan-harga.perkembangan-harga-print', [
+            'perkembanganHargas' => $this->data
+        ]);
     }
 
 

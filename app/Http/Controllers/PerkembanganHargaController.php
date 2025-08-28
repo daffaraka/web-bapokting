@@ -42,6 +42,8 @@ class PerkembanganHargaController extends Controller
             'description' => 'Halaman ini menampilkan perkembangan harga komoditas yang ada di dalam database',
             'perkembanganHargas' => $perkembangan,
             'modul' => 'Perkembangan Harga',
+            'route_create' => $this->routeCreate,
+
         ];
         return view('dashboard.perkembangan-harga.perkembangan-harga-index', $data);
     }
@@ -51,7 +53,15 @@ class PerkembanganHargaController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Tambah Perkembangan Harga Jenis Komoditas',
+            'description' => 'Halaman ini digunakan untuk menambahkan data komoditas yang baru',
+            'komoditas' => Komoditas::all(),
+            'uptd' => UPTD::all(),
+
+        ];
+
+        return view('dashboard.perkembangan-harga.perkembangan-harga-create', $data);
     }
 
     /**
@@ -95,23 +105,77 @@ class PerkembanganHargaController extends Controller
     }
 
 
-    public function export()
+
+    public function downloadFile(Request $request)
     {
-        $fileName = 'perkembangan-harga-' . Carbon::now()->format('Y-m-d_H-i-s') . '.xlsx';
-        return Excel::download(new PerkembanganHargaExport, $fileName);
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
+        $download = $request->download;
+
+        $data = $this->getPerkembanganHargaData($tanggal_awal, $tanggal_akhir);
+
+
+        if ($download == 'excel') {
+            return $this->export($data);
+        } else {
+            return $this->print($data);
+        }
     }
 
-    public function print()
+
+
+    public function export($data)
     {
-        $perkembanganHargas = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
+        $fileName = 'perkembangan-harga-' . now()->format('Y-m-d_H-i-s') . '.xlsx';
+        return Excel::download(new PerkembanganHargaExport($data), $fileName);
+    }
+    public function print($data)
+    {
+        $pdf = Pdf::loadView('dashboard.perkembangan-harga.perkembangan-harga-print', [
+            'perkembanganHargas' => $data
+        ]);
+
+        return $pdf->stream('perkembangan-harga-' . now()->format('Y-m-d_H-i-s') . '.pdf');
+    }
+
+
+
+
+    protected function getPerkembanganHargaData($tanggal_awal, $tanggal_akhir)
+    {
+        if (is_null($tanggal_awal) && is_null($tanggal_akhir)) {
+            $komoditas = JenisKomoditas::with([
+                'harga_monitorings.pasar.uptd',
+                'komoditas',
+                'harga_monitorings.jenis_komoditas'
+            ])->get();
+        } else {
+            $komoditas = JenisKomoditas::whereHas('harga_monitorings', function ($q) use ($tanggal_awal, $tanggal_akhir) {
+                if ($tanggal_awal && $tanggal_akhir) {
+                    $q->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir]);
+                }
+            })->get();
+
+            $komoditas->load([
+                'harga_monitorings' => function ($q) use ($tanggal_awal, $tanggal_akhir) {
+                    if ($tanggal_awal && $tanggal_akhir) {
+                        $q->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir]);
+                    }
+                },
+                'harga_monitorings.pasar.uptd',
+                'komoditas',
+                'harga_monitorings.jenis_komoditas'
+            ]);
+        }
+
+
+
+        return $komoditas->map(function ($perkembangan) {
             return [
                 'komoditas' => $perkembangan->komoditas->nama_komoditas,
                 'harga_monitorings' => $perkembangan->harga_monitorings,
             ];
         });
-
-        $pdf = Pdf::loadView('dashboard.perkembangan-harga.perkembangan-harga-print', compact('perkembanganHargas'));
-
-        return $pdf->download('perkembangan-harga-' . Carbon::now()->format('Y-m-d_H-i-s') . '.pdf');
     }
+    // }
 }

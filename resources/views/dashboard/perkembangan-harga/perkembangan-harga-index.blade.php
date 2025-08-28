@@ -8,16 +8,65 @@
 
 
 
-            <div class="d-flex justify-content-end gap-3 mb-4">
-                <a href="{{ route('perkembangan-harga.export') }}" class="btn btn-success"><i class="fas fa-file-excel"></i>
-                    Download Excel</a>
-                <a href="{{ route('perkembangan-harga.print') }}" class="btn btn-danger"><i class="fas fa-file-pdf"></i>
-                    Download PDF</a>
-            </div>
+
+            {{-- <div class="d-flex justify-content-end gap-3 mb-4"> --}}
+            <form action="{{ route('perkembangan-harga.download-file') }}" method="POST">
+                @csrf
+                <div class="row mb-5">
+                    <div class="col-3">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar"></i></span>
+                            <input type="date" name="tanggal_awal" class="form-control"
+                                value="{{ request()->query('tanggal_awal') }}" placeholder="Tanggal Awal"
+                                aria-label="Tanggal Awal" aria-describedby="basic-addon1">
+
+                        </div>
+
+                    </div>
 
 
 
-            <div class="table-responsive">
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input type="date" name="tanggal_akhir" class="form-control"
+                                value="{{ request()->query('tanggal_akhir') }}" placeholder="Tanggal Akhir"
+                                aria-label="Tanggal Akhir" aria-describedby="basic-addon1">
+                            <span class="input-group-text">s/d</span>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success" name="download" value="excel"><i
+                                class="fas fa-file-excel"></i>
+                            Download Excel</button>
+
+                            <button type="submit" class="btn btn-danger" name="download" value="pdf"><i
+                                    class="fas fa-file-pdf"></i>
+                                Download PDF</button>
+                    </div>
+
+                </div>
+
+
+                {{-- <button type="submit" class="btn btn-primary" value="filter"><i class="fas fa-search"></i>
+                        Filter</button> --}}
+
+
+
+                {{-- <a href="{{ route('perkembangan-harga.export') }}" class="btn btn-success"><i
+                            class="fas fa-file-excel"></i>
+                        Download Excel</a>
+                    <a href="{{ route('perkembangan-harga.print') }}" class="btn btn-danger"><i class="fas fa-file-pdf"></i>
+                        Download PDF</a> --}}
+            </form>
+
+            {{-- </div> --}}
+
+
+
+            <div class="table-responsive mt-4">
                 <table id="basic-datatables" class="table table-bordered">
                     <thead>
                         <tr>
