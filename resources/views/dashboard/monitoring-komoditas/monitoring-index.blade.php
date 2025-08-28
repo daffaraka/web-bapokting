@@ -80,13 +80,13 @@
                         @foreach ($uptds as $uptd)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $uptd->nama }}</td>
+                                <td>{{ $uptd->nama_uptd }}</td>
                                 <td>
                                     <div class="form-button-action gap-2">
-                                        <a href="{{ route('uptd.edit', $uptd->id) }}" class="btn btn-primary " data-bs-toggle="tooltip" title="Edit">
+                                        <a href="{{ route('user-uptd.edit', $uptd->id) }}" class="btn btn-primary " data-bs-toggle="tooltip" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('uptd.destroy', $uptd->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('user-uptd.destroy', $uptd->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                               <button type="button" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"

@@ -12,6 +12,7 @@ class UPTD extends Model
     protected $table = 'uptds';
     protected $fillable = [
         'nama',
+        'user_id',
         // 'alamat'
     ];
 
@@ -22,6 +23,6 @@ class UPTD extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

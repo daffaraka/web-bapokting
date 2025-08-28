@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UPTD;
+use App\Models\User;
 use App\Models\Pasar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,12 +16,14 @@ class UPTDController extends Controller
     public function index()
     {
         $data = [
-            'uptds' => UPTD::all(),
-            'title' => 'Data UPTD',
+            'uptds' => UPTD::with('users')->get(),
+            'title' => 'Data User & UPTD',
             'description' => 'Halaman ini menampilkan data UPTD yang ada di dalam database',
-            'route_create' => route('uptd.create'),
-            'modul' => 'UPTD'
+            'route_create' => route('user-uptd.create'),
+            'modul' => 'User & UPTD'
         ];
+
+        // dd($data['uptds']);
         return view('dashboard.uptd.uptd-index', $data);
     }
 
@@ -30,9 +33,9 @@ class UPTDController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Tambah UPTD',
-            'description' => 'Halaman ini digunakan untuk menambahkan data UPTD yang baru',
-            'pasar' => Pasar::all()
+            'title' => 'Tambah User dan UPTD Baru',
+            'description' => 'Halaman ini digunakan untuk menambahkan data User dan UPTD yang baru',
+            'pasar' => Pasar::whereDoesntHave('uptd')->get(),
         ];
         return view('dashboard.uptd.uptd-create', $data);
     }
@@ -43,23 +46,47 @@ class UPTDController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|max:255'
+            'nama_uptd' => 'required|max:255',
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role' => 'required'
         ], [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.'
+            'nama_uptd.required' => 'Nama UPTD wajib diisi.',
+            'nama_uptd.max' => 'Nama UPTD tidak boleh lebih dari 255 karakter.',
+            'name.required' => 'Nama wajib diisi.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus minimal 6 karakter.',
+            'role.required' => 'Jbatan wajib dipilih.'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('uptd.create')
+            return redirect()->route('user-uptd.create')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        UPTD::create([
-            'nama' => $request->nama
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role
         ]);
 
-        return redirect()->route('uptd.index')->with('success', 'Data UPTD berhasil ditambahkan');
+        if ($user) {
+            UPTD::create([
+                'nama_uptd' => $request->nama_uptd,
+                'user_id' => $user->id
+            ]);
+        }
+
+
+
+        return redirect()->route('user-uptd.index')->with('success', 'Data User dan UPTD baru berhasil ditambahkan');
     }
 
     /**
@@ -82,10 +109,12 @@ class UPTDController extends Controller
     {
         $data = [
             'uptd' => $uptd->load('pasars'),
-            'pasar' => Pasar::all(),
+            'pasar' => Pasar::whereDoesntHave('uptds')->get(),
             'title' => 'Edit UPTD',
             'description' => 'Halaman ini digunakan untuk mengedit data UPTD yang sudah ada'
         ];
+
+        // dd($data['pasar']);
         return view('dashboard.uptd.uptd-edit', $data);
     }
 
@@ -97,20 +126,20 @@ class UPTDController extends Controller
 
         // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|max:255'
+            'nama_uptd' => 'required|max:255'
         ], [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.'
+            'nama_uptd.required' => 'Nama UPTD wajib diisi.',
+            'nama_uptd.max' => 'Nama UPTD tidak boleh lebih dari 255 karakter.'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('uptd.edit', $uptd->id)
+            return redirect()->route('user-uptd.edit', $uptd->id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
         $uptd->update([
-            'nama' => $request->nama
+            'nama_uptd' => $request->nama_uptd
         ]);
 
         $uptd->pasars()->delete();
@@ -122,7 +151,7 @@ class UPTDController extends Controller
             ]);
         }
 
-        return redirect()->route('uptd.index')->with('success', 'Data UPTD berhasil diupdate');
+        return redirect()->route('user-uptd.index')->with('success', 'Data UPTD berhasil diupdate');
     }
 
     /**
@@ -131,6 +160,6 @@ class UPTDController extends Controller
     public function destroy(UPTD $uptd)
     {
         $uptd->delete();
-        return redirect()->route('uptd.index')->with('success', 'Data UPTD berhasil dihapus');
+        return redirect()->route('user-uptd.index')->with('success', 'Data UPTD berhasil dihapus');
     }
 }

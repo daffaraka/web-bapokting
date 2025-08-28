@@ -22,14 +22,14 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            UPTDSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
+            UPTDSeeder::class,
             KomoditasSeeder::class,
             JenisKomoditasSeeder::class,
             PasarSeeder::class,
             HargaMonitoringSeeder::class,
-            PermissionSeeder::class,
-            RoleSeeder::class,
             BeritaSeeder::class
         ]);
     }

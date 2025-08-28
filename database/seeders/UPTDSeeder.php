@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\UPTD;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UPTDSeeder extends Seeder
 {
@@ -14,8 +15,11 @@ class UPTDSeeder extends Seeder
     public function run(): void
     {
 
+        $user = User::all()->pluck('id')->toArray();
         $daftarUptd = [
-            'Setu-Cibitung & Sukatani',
+            'Setu',
+            'Cibitung',
+            'Sukatani',
             'Cibarusah',
             'Tambun',
             'Serang',
@@ -26,7 +30,8 @@ class UPTDSeeder extends Seeder
         ];
         foreach ($daftarUptd as $namaUptd) {
             UPTD::create([
-                'nama' => 'UPTD '.$namaUptd
+                'nama_uptd' => 'UPTD '.$namaUptd,
+                'user_id' => $user[array_rand($user)]
             ]);
         }
     }

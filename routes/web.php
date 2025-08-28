@@ -44,8 +44,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('komoditas', KomoditasController::class)->parameters(['komoditas' => 'komoditas']);
     Route::resource('jenis-komoditas', JenisKomoditasController::class)->parameters(['jenis-komoditas' => 'jenis-komoditas']);
     Route::resource('pasar', PasarController::class);
-    Route::resource('uptd', UPTDController::class);
-    Route::resource('user', UserController::class);
+    Route::resource('user-uptd', UPTDController::class);
+    // Route::resource('user', UserController::class);
     Route::resource('harga-monitoring', HargaMonitoringController::class);
 
     Route::get('perkembangan-harga/export',[PerkembanganHargaController::class,'export'])->name('perkembangan-harga.export');

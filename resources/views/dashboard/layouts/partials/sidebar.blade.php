@@ -3,7 +3,8 @@
            <!-- Logo Header -->
            <div class="logo-header" data-background-color="dark">
                <a href="index.html" class="logo">
-                   <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand" height="20" />
+                   <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
+                       height="20" />
                </a>
                <div class="nav-toggle">
                    <button class="btn btn-toggle toggle-sidebar">
@@ -38,12 +39,14 @@
                        </a>
                    </li>
 
-                   <li class="nav-section">
-                       <span class="sidebar-mini-icon">
-                           <i class="fa fa-ellipsis-h"></i>
-                       </span>
-                       <h4 class="text-section">Frontpage</h4>
-                   </li>
+                   @role('admin')
+                       <li class="nav-section">
+                           <span class="sidebar-mini-icon">
+                               <i class="fa fa-ellipsis-h"></i>
+                           </span>
+                           <h4 class="text-section">Frontpage </h4>
+                       </li>
+                   @endrole
 
                    <li class="nav-item {{ request()->routeIs('berita.*') ? 'active' : '' }}">
                        <a href="{{ route('berita.index') }}">
@@ -72,14 +75,18 @@
                            <p>Perkembangan Harga </p>
                        </a>
                    </li>
-                   <li class="nav-item {{ request()->routeIs('komoditas.*') ? 'active' : '' }}">
-                       <a href="{{ route('komoditas.index') }}">
-                           <i class="fas fa-box"></i>
-                           <p> Komoditas </p>
-                       </a>
-                   </li>
 
-                     <li class="nav-item {{ request()->routeIs('jenis-komoditas.*') ? 'active' : '' }}">
+                   @can('komoditas-read')
+                       <li class="nav-item {{ request()->routeIs('komoditas.*') ? 'active' : '' }}">
+                           <a href="{{ route('komoditas.index') }}">
+                               <i class="fas fa-box"></i>
+                               <p> Komoditas </p>
+                           </a>
+                       </li>
+                   @endcan
+
+
+                   <li class="nav-item {{ request()->routeIs('jenis-komoditas.*') ? 'active' : '' }}">
                        <a href="{{ route('jenis-komoditas.index') }}">
                            <i class="fas fa-list-ul"></i>
                            <p> Jenis Komoditas </p>
@@ -93,10 +100,10 @@
                    </li>
 
 
-                   <li class="nav-item {{ request()->routeIs('uptd.*') ? 'active' : '' }}">
-                       <a href="{{ route('uptd.index') }}">
+                   <li class="nav-item {{ request()->routeIs('user-uptd.*') ? 'active' : '' }}">
+                       <a href="{{ route('user-uptd.index') }}">
                            <i class="fas fa-building"></i>
-                           <p>UPTD</p>
+                           <p>User & UPTD</p>
                        </a>
                    </li>
 

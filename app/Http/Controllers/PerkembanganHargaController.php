@@ -33,7 +33,7 @@ class PerkembanganHargaController extends Controller
             ];
         });
 
-        $uptd = UPTD::select('id', 'nama')->get();
+        $uptd = UPTD::select('id', 'nama_uptd')->get();
 
 
         $data = [

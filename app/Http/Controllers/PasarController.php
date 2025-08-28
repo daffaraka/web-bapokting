@@ -46,7 +46,7 @@ class PasarController extends Controller
         $request->validate([
             'nama' => 'required',
             'lokasi' => 'required',
-            'uptd_id' => 'required',
+            // 'uptd_id' => 'required',
         ], [
             'nama.required' => 'Nama Pasar harus diisi',
             'lokasi.required' => 'Lokasi harus diisi',

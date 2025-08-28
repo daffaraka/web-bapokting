@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="uptd_id">UPTD</label>
-                    <select name="uptd_id" id="uptd_id" class="form-control @error('uptd_id') is-invalid @enderror" required>
+                    <select name="uptd_id" id="uptd_id" class="form-control @error('uptd_id') is-invalid @enderror" >
                         <option value="">Pilih UPTD</option>
                         @foreach ($uptd as $u)
                             <option value="{{ $u->id }}" {{ old('uptd_id') == $u->id ? 'selected' : '' }}>{{ $u->nama }}</option>

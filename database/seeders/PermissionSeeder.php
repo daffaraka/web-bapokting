@@ -17,6 +17,7 @@ class PermissionSeeder extends Seeder
 
             // Dashboard
             'dashboard-read',
+
             // Modul 1: Komoditas
             'komoditas-create',
             'komoditas-read',
@@ -24,14 +25,21 @@ class PermissionSeeder extends Seeder
             'komoditas-delete',
             'komoditas-view-history',
 
-            // Modul 2: Monitoring Harga
+            // Modul 2: Jenis Komoditas
+            'jenis-komoditas-create',
+            'jenis-komoditas-read',
+            'jenis-komoditas-update',
+            'jenis-komoditas-delete',
+            'jenis-komoditas-view-history',
+
+            // Modul 3: Monitoring Harga
             'harga-create',       // input harga & stok
             'harga-read',
             'harga-update',       // edit harga & stok
             'harga-delete',       // validasi dianggap sebagai delete/close
             'harga-view-history',
 
-            // Modul 3: Laporan & Visualisasi
+            // Modul 4: Laporan & Visualisasi
             'laporan-create',     // jika ada fitur buat laporan manual
             'laporan-read',       // lihat laporan seluruh wilayah
             'laporan-update',     // jika laporan bisa diubah (opsional)
@@ -40,7 +48,7 @@ class PermissionSeeder extends Seeder
             'laporan-download',   // download excel/pdf
             'laporan-grafik',     // lihat grafik
 
-            // Modul 4: Manajemen User
+            // Modul 5: Manajemen User
             'user-create',        // tambah operator
             'user-read',          // lihat daftar user
             'user-update',        // edit user / profil sendiri
@@ -48,13 +56,13 @@ class PermissionSeeder extends Seeder
             'user-login',         // login ke sistem
             'user-password',      // ganti password sendiri
 
-            // Modul 5: Manajemen UPTD
+            // Modul 6: Manajemen UPTD
             'uptd-create',
             'uptd-read',
             'uptd-update',
             'uptd-delete',
 
-            // Modul 6: Manajemen Pasar
+            // Modul 7: Manajemen Pasar
             'pasar-create',
             'pasar-read',
             'pasar-update',

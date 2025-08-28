@@ -39,7 +39,7 @@
                                     <td>{{ $perkembanganHarga['komoditas'] }}</td> {{-- Komoditas langsung ditaruh di kolom --}}
                                     <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                                     <td>{{ $monitoring->pasar->nama }}</td>
-                                    <td>{{ $monitoring->pasar->uptd->nama }}</td>
+                                    <td>{{ $monitoring->pasar->uptd->nama_uptd }}</td>
                                     <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}
                                     </td>
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>

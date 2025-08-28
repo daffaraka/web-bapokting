@@ -22,7 +22,9 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pasar->nama }}</td>
                                 <td>{{ $pasar->lokasi }}</td>
-                                <td>{{ $pasar->uptd->nama }}</td>
+                                <td >
+                                    <button class="{{ $pasar->uptd != null ? 'btn btn-success' : 'btn btn-danger' }}">{{ $pasar->uptd->nama_uptd ?? ' Belum Ditambahkan' }}</button>
+                                    </td>
                                 <td>
                                     <div class="form-button-action gap-2">
                                         <a href="{{ route('pasar.edit', $pasar->id) }}" class="btn btn-primary "
