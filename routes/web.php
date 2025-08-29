@@ -51,7 +51,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::post('perkembangan-harga/download-file', [PerkembanganHargaController::class,'downloadFile'])->name('perkembangan-harga.download-file');
     Route::get('perkembangan-harga/export',[PerkembanganHargaController::class,'export'])->name('perkembangan-harga.export');
     Route::get('perkembangan-harga/print',[PerkembanganHargaController::class,'print'])->name('perkembangan-harga.print');
-    Route::resource('perkembangan-harga', PerkembanganHargaController::class);
+    Route::post('perkembangan-harga/get-select', [PerkembanganHargaController::class,'getSelect'])->name('perkembangan-harga.getSelect');
+    Route::resource('perkembangan-harga', PerkembanganHargaController::class)->parameters(['perkembangan-harga' => 'perkembangan-harga']);
 
     Route::resource('berita', ManajemenBeritaController::class)->parameters(['berita' => 'berita']);
 });

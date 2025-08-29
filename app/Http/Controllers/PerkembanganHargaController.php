@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\UPTD;
+use App\Models\Pasar;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
 use App\Models\JenisKomoditas;
 use App\Models\HargaMonitoring;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PerkembanganHargaExport;
 
@@ -55,7 +57,7 @@ class PerkembanganHargaController extends Controller
     {
         $data = [
             'title' => 'Tambah Perkembangan Harga Jenis Komoditas',
-            'description' => 'Halaman ini digunakan untuk menambahkan data komoditas yang baru',
+            'description' => 'Halaman ini digunakan untuk menambahkan perkembangan harga',
             'komoditas' => Komoditas::all(),
             'uptd' => UPTD::all(),
 
@@ -69,7 +71,32 @@ class PerkembanganHargaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'jenis_komoditas_id' => 'required',
+                'pasar_id' => 'required',
+                'harga' => 'required',
+                'stok' => 'required',
+            ],
+            [
+                'jenis_komoditas_id.required' => 'Jenis Komoditas wajib dipilih',
+                'pasar_id.required' => 'Pasar wajib dipilih',
+                'harga.required' => 'Harga wajib diisi',
+                'stok.required' => 'Stok wajib diisi',
+            ]
+        );
+
+
+        HargaMonitoring::create([
+            'jenis_komoditas_id' => $request->jenis_komoditas_id,
+            'pasar_id' => $request->pasar_id,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'user_id' => Auth::user()->id,
+            'tanggal' => $request->tanggal ?? Carbon::now()->format('Y-m-d'),
+        ]);
+
+        return redirect()->route('perkembangan-harga.index')->with('success', 'Perkembangan harga berhasil ditambahkan');
     }
 
     /**
@@ -83,18 +110,50 @@ class PerkembanganHargaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(HargaMonitoring $perkembanganHarga)
     {
-        //
+        // dd($perkembanganHarga);
+        $data = [
+            'title' => 'Edit Perkembangan Harga Jenis Komoditas',
+            'description' => 'Halaman ini digunakan untuk memperbarui perkembangan harga',
+            'komoditas' => Komoditas::all(),
+            'uptd' => UPTD::all(),
+            'perkembanganHarga' => $perkembanganHarga->load('jenis_komoditas.komoditas', 'pasar.uptd'),
+
+        ];
+
+        return view('dashboard.perkembangan-harga.perkembangan-harga-edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, HargaMonitoring $perkembanganHarga)
     {
-        //
-    }
+        $request->validate(
+            [
+                'jenis_komoditas_id' => 'required',
+                'pasar_id' => 'required',
+                'harga' => 'required',
+                'stok' => 'required',
+            ],
+            [
+                'jenis_komoditas_id.required' => 'Jenis Komoditas wajib dipilih',
+                'pasar_id.required' => 'Pasar wajib dipilih',
+                'harga.required' => 'Harga wajib diisi',
+                'stok.required' => 'Stok wajib diisi',
+            ]
+        );
+
+
+        $perkembanganHarga->update([
+            'jenis_komoditas_id' => $request->jenis_komoditas_id,
+            'pasar_id' => $request->pasar_id,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'user_id' => Auth::user()->id,
+            'tanggal' => $request->tanggal ?? Carbon::now()->format('Y-m-d'),
+        ]);}
 
     /**
      * Remove the specified resource from storage.
@@ -178,4 +237,23 @@ class PerkembanganHargaController extends Controller
         });
     }
     // }
+
+
+    public function getSelect(Request $request)
+    {
+
+        $data = '';
+        if ($request->has('uptd_id')) {
+            $data = Pasar::where('uptd_id', $request->uptd_id)->get();
+            return response()->json($data);
+        } else {
+            $data = JenisKomoditas::where('komoditas_id', $request->komoditas_id)->get();
+            return response()->json($data);
+        }
+
+
+
+        // dd($request->has('uptd_id'));
+        // if($request)
+    }
 }

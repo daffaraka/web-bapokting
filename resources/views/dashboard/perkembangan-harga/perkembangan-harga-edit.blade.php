@@ -15,9 +15,9 @@
                             <label for="pasar_id">UPTD</label>
                             <select name="uptd_id" id="uptd_id"
                                 class="form-control @error('uptd_id') is-invalid @enderror" required>
-                                <option value="">Pilih Pasar</option>
+                                <option value="">Pilih UPTD</option>
                                 @foreach ($uptd as $u)
-                                    <option value="{{ $u->id }}" {{ old('uptd_id') == $u->id ? 'selected' : '' }}>
+                                    <option value="{{ $u->id }}" {{$perkembanganHarga->pasar->uptd->id == $u->id ? 'selected' : ''}}>
                                         {{ $u->nama_uptd }}</option>
                                 @endforeach
                             </select>
@@ -48,7 +48,7 @@
                                 class="form-control @error('komoditas_id') is-invalid @enderror" required>
                                 <option value="">Pilih Komoditas</option>
                                 @foreach ($komoditas as $k)
-                                    <option value="{{ $k->id }}" {{ old('komoditas_id') == $k->id ? 'selected' : '' }}>{{ $k->nama_komoditas }}</option>
+                                    <option value="{{ $k->id }}" {{$perkembanganHarga->jenis_komoditas->komoditas->id == $k->id ? 'selected' : ''}}>{{ $k->nama_komoditas }}</option>
 
                                 @endforeach
                             </select>
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <input type="date" name="tanggal" id="tanggal"
-                        class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" required>
+                        class="form-control @error('tanggal') is-invalid @enderror" value="{{ $perkembanganHarga->tanggal ?? old('tanggal') }}" required>
                     @error('tanggal')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -90,7 +90,7 @@
                 <div class="form-group">
                     <label for="harga">Harga</label>
                     <input type="number" name="harga" id="harga"
-                        class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') }}" required>
+                        class="form-control @error('harga') is-invalid @enderror" value="{{ $perkembanganHarga->harga ?? old('harga') }}" required>
                     @error('harga')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <label for="stok">Stok</label>
                     <input type="number" name="stok" id="stok"
-                        class="form-control @error('stok') is-invalid @enderror" value="{{ old('stok') }}" required>
+                        class="form-control @error('stok') is-invalid @enderror" value="{{ $perkembanganHarga->stok ?? old('stok') }}" required>
                     @error('stok')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -42,9 +42,9 @@
                                 class="fas fa-file-excel"></i>
                             Download Excel</button>
 
-                            <button type="submit" class="btn btn-danger" name="download" value="pdf"><i
-                                    class="fas fa-file-pdf"></i>
-                                Download PDF</button>
+                        <button type="submit" class="btn btn-danger" name="download" value="pdf"><i
+                                class="fas fa-file-pdf"></i>
+                            Download PDF</button>
                     </div>
 
                 </div>
@@ -89,12 +89,12 @@
                                     <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
                                     <td>{{ $monitoring->pasar->nama }}</td>
                                     <td>{{ $monitoring->pasar->uptd->nama_uptd }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}
+                                    <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('D MMMM YYYY') }}
                                     </td>
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="form-button-action gap-2">
-                                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+                                            <a href="{{ route('perkembangan-harga.edit', $monitoring->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
                                                 title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -130,7 +130,8 @@
             columnDefs: [{
                     orderable: false,
                     targets: [7]
-                } // kolom Action tidak bisa sort
+                },
+
             ],
             rowGroup: {
                 dataSrc: 1 // kolom ke-2 → "Nama Komoditas"
