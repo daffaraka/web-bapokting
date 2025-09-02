@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="pasar_id">UPTD</label>
+                            <label class="fw-bold  for="pasar_id">UPTD</label>
                             <select name="uptd_id" id="uptd_id"
                                 class="form-control @error('uptd_id') is-invalid @enderror" required>
                                 <option value="">Pilih Pasar</option>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="pasar_id">Pasar <b> (Pilih UPTD terlebih dahulu)</b> </label>
+                            <label class="fw-bold  for="pasar_id">Pasar <b> (Pilih UPTD terlebih dahulu)</b> </label>
                             <select name="pasar_id" id="pasar_id"
                                 class="form-control @error('pasar_id') is-invalid @enderror" required>
                                 <option value="">Pilih Pasar</option>
@@ -43,7 +43,7 @@
 
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="komoditas_id">Komoditas</label>
+                            <label class="fw-bold  for="komoditas_id">Komoditas</label>
                             <select name="komoditas_id" id="komoditas_id"
                                 class="form-control @error('komoditas_id') is-invalid @enderror" required>
                                 <option value="">Pilih Komoditas</option>
@@ -61,7 +61,7 @@
 
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="jenis_komoditas_id">Jenis Komoditas <b> (Pilih komoditas terlebih dahulu)</b>
+                            <label class="fw-bold  for="jenis_komoditas_id">Jenis Komoditas <b> (Pilih komoditas terlebih dahulu)</b>
                             </label>
                             <select name="jenis_komoditas_id" id="jenis_komoditas_id"
                                 class="form-control @error('jenis_komoditas_id') is-invalid @enderror" required>
@@ -78,7 +78,7 @@
 
 
                 <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
+                    <label class="fw-bold  for="tanggal">Tanggal</label>
                     <input type="date" name="tanggal" id="tanggal"
                         class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" required>
                     @error('tanggal')
@@ -88,7 +88,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="harga">Harga</label>
+                    <label class="fw-bold  for="harga">Harga</label>
                     <input type="number" name="harga" id="harga"
                         class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') }}" required>
                     @error('harga')
@@ -96,7 +96,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="stok">Stok</label>
+                    <label class="fw-bold  for="stok">Stok</label>
                     <input type="number" name="stok" id="stok"
                         class="form-control @error('stok') is-invalid @enderror" value="{{ old('stok') }}" required>
                     @error('stok')

@@ -10,7 +10,7 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="">Pilih Komoditas</label>
+                    <label class="fw-bold  for="">Pilih Komoditas</label>
                     <select name="komoditas_id" id="komoditas_" class="form-control">
                         <option value="">Pilih Komoditas</option>
                         @foreach ($komoditas as $kom)
@@ -21,7 +21,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="nama">Nama Jenis</label>
+                    <label class="fw-bold  for="nama">Nama Jenis</label>
                     <input type="text" name="nama_jenis" id="nama_jenis"
                         class="form-control @error('nama_jenis') is-invalid @enderror"
                         value="{{ old('nama_jenis', $jenisKomoditas->nama_jenis) }}" required>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="harga">Harga</label>
+                    <label class="fw-bold  for="harga">Harga</label>
                     <input type="number" name="harga" id="harga"
                         class="form-control @error('harga') is-invalid @enderror"
                         value="{{ old('harga', $jenisKomoditas->harga) }}" required>
@@ -40,7 +40,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="satuan">Satuan</label>
+                    <label class="fw-bold  for="satuan">Satuan</label>
                     <select name="satuan" id="satuan" class="form-control @error('satuan') is-invalid @enderror"
                         required>
                         <option value="">Pilih Satuan</option>

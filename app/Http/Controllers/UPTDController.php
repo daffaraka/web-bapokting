@@ -105,14 +105,17 @@ class UPTDController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UPTD $uptd)
+    public function edit(UPTD $user_uptd)
     {
         $data = [
-            'uptd' => $uptd->load('pasars'),
-            'pasar' => Pasar::whereDoesntHave('uptds')->get(),
+            'uptd' => $user_uptd->load(['pasars', 'user.roles']),
+            'pasar' => Pasar::whereDoesntHave('uptd')->get(),
             'title' => 'Edit UPTD',
             'description' => 'Halaman ini digunakan untuk mengedit data UPTD yang sudah ada'
         ];
+
+
+        // dd($data['uptd']);
 
         // dd($data['pasar']);
         return view('dashboard.uptd.uptd-edit', $data);
@@ -126,10 +129,22 @@ class UPTDController extends Controller
 
         // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'nama_uptd' => 'required|max:255'
+            'nama_uptd' => 'required|max:255',
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role' => 'required'
         ], [
             'nama_uptd.required' => 'Nama UPTD wajib diisi.',
-            'nama_uptd.max' => 'Nama UPTD tidak boleh lebih dari 255 karakter.'
+            'nama_uptd.max' => 'Nama UPTD tidak boleh lebih dari 255 karakter.',
+            'name.required' => 'Nama wajib diisi.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus minimal 6 karakter.',
+            'role.required' => 'Jbatan wajib dipilih.'
         ]);
 
         if ($validator->fails()) {

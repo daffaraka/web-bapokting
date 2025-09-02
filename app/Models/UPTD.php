@@ -21,7 +21,7 @@ class UPTD extends Model
         return $this->hasMany(Pasar::class, 'uptd_id');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

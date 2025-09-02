@@ -8,7 +8,7 @@
             <form action="{{ route('komoditas.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="nama">Nama</label>
+                    <label class="fw-bold  for="nama">Nama</label>
                     <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>

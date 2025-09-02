@@ -153,14 +153,18 @@ class PerkembanganHargaController extends Controller
             'stok' => $request->stok,
             'user_id' => Auth::user()->id,
             'tanggal' => $request->tanggal ?? Carbon::now()->format('Y-m-d'),
-        ]);}
+        ]);
+
+        return redirect()->route('perkembangan-harga.index')->with('success', 'Perkembangan harga berhasil diperbarui');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(HargaMonitoring $perkembanganHarga)
     {
-        //
+        $perkembanganHarga->delete();
+        return redirect()->route('perkembangan-harga.index')->with('success', 'Perkembangan harga berhasil dihapus');
     }
 
 

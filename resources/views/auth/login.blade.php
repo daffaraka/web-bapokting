@@ -29,17 +29,17 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group first">
-                                    <label for="email">Email</label>
+                                    <label class="fw-bold  for="email">Email</label>
                                     <input type="email" class="form-control" placeholder="your-email@gmail.com"
                                         id="email" name="email" value="{{ old('email') }}" required autofocus>
                                 </div>
                                 <div class="form-group last mb-3">
-                                    <label for="password">Password</label>
+                                    <label class="fw-bold  for="password">Password</label>
                                     <input type="password" class="form-control" placeholder="Your Password"
                                         id="password" name="password" required autocomplete="current-password">
                                 </div>
                                 <div class="d-sm-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
+                                    <label class="fw-bold  class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
                                             me</span>
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>

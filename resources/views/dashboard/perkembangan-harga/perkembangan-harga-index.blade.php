@@ -94,11 +94,11 @@
                                     <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="form-button-action gap-2">
-                                            <a href="{{ route('perkembangan-harga.edit', $monitoring->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
-                                                title="Edit">
+                                            <a href="{{ route('perkembangan-harga.edit', $monitoring->id) }}"
+                                                class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="" method="POST" style="display:inline;">
+                                            <form action="{{route('perkembangan-harga.destroy', $monitoring->id)}}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm deleteBtn"
@@ -123,6 +123,41 @@
 
 @push('scripts')
     <script>
+        const registerDeleteItemHandlers = () => {
+
+            $(".deleteBtn").click(function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                swal({
+                    title: 'Anda yakin?',
+                    text: "Data tidak dapat dikembalikan!",
+                    type: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: "Ya, hapus!",
+                            className: "btn btn-success",
+                        },
+                        cancel: {
+                            visible: true,
+                            className: "btn btn-danger",
+                        },
+                    },
+                }).then((hapus) => {
+                    if (hapus) {
+                        form.submit();
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
+
+        };
+
+
+        registerDeleteItemHandlers();
+
+
+
         $('#basic-datatables').DataTable({
             paging: true,
             searching: true,
@@ -136,32 +171,12 @@
             rowGroup: {
                 dataSrc: 1 // kolom ke-2 → "Nama Komoditas"
             }
+        }).on("draw.dt", function() {
+            registerDeleteItemHandlers();
         });
-        $(".deleteBtn").click(function(e) {
-            e.preventDefault();
-            var form = $(this).parents('form');
-            swal({
-                title: 'Anda yakin?',
-                text: "Data tidak dapat dikembalikan!",
-                type: 'warning',
-                buttons: {
-                    confirm: {
-                        text: "Ya, hapus!",
-                        className: "btn btn-success",
-                    },
-                    cancel: {
-                        visible: true,
-                        className: "btn btn-danger",
-                    },
-                },
-            }).then((hapus) => {
-                if (hapus) {
-                    form.submit();
-                } else {
-                    swal.close();
-                }
-            });
-        })
+
+
+
 
         // var multipleLineChart = document
         //     .getElementById("multipleLineChart")
