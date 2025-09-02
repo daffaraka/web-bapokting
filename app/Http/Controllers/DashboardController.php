@@ -16,6 +16,8 @@ class DashboardController extends Controller
     {
 
         $user = User::count();
+        $admin = User::role('admin')->count();
+        $op_uptd = User::role('op_uptd')->count();
         $komoditas = Komoditas::count();
         $hargaMonitoring = HargaMonitoring::count();
         $pasar = Pasar::count();
@@ -25,6 +27,8 @@ class DashboardController extends Controller
 
         $data = [
             'user' => $user,
+            'admin' => $admin,
+            'op_uptd' => $op_uptd,
             'komoditas' => $komoditas,
             'hargaMonitoring' => $hargaMonitoring,
             'pasar' => $pasar,
@@ -37,6 +41,6 @@ class DashboardController extends Controller
             // 'route_create' =>
             // 'perkembangan_harga' =>
         ];
-        return view('dashboard',$data);
+        return view('dashboard', $data);
     }
 }

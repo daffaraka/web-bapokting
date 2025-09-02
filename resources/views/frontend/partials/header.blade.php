@@ -1,4 +1,4 @@
-  <header id="header" class="header d-flex align-items-center fixed-top {{ Route::currentRouteName() != 'frontpage' ? 'sticky-top' : ''}} ">
+  <header id="header" class="header d-flex align-items-center fixed-top ">
       <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
           <a href="/" class="logo d-flex align-items-center">

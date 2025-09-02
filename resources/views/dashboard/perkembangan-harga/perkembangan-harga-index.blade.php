@@ -50,16 +50,6 @@
                 </div>
 
 
-                {{-- <button type="submit" class="btn btn-primary" value="filter"><i class="fas fa-search"></i>
-                        Filter</button> --}}
-
-
-
-                {{-- <a href="{{ route('perkembangan-harga.export') }}" class="btn btn-success"><i
-                            class="fas fa-file-excel"></i>
-                        Download Excel</a>
-                    <a href="{{ route('perkembangan-harga.print') }}" class="btn btn-danger"><i class="fas fa-file-pdf"></i>
-                        Download PDF</a> --}}
             </form>
 
             {{-- </div> --}}

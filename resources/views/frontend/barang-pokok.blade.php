@@ -2,12 +2,12 @@
 @section('title', 'Profil Bidang Bapokting')
 @section('content')
 
-<style>
-    #basic-datatables_filter {
-        float: right;
+    <style>
+        #basic-datatables_filter {
+            float: right;
 
-    } 
-</style>
+        }
+    </style>
     <!-- Page Title -->
     <div class="page-title dark-background">
         <div class="container position-relative">
@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($barangPenting as $item)
+                @foreach ($barangPokok as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nama_komoditas }}</td>
@@ -50,7 +50,7 @@
     <script>
         $("#basic-datatables").DataTable({
             "pageLength": 25,
+
         });
-       
     </script>
 @endpush

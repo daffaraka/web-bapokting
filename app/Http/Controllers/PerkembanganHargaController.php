@@ -255,9 +255,5 @@ class PerkembanganHargaController extends Controller
             return response()->json($data);
         }
 
-
-
-        // dd($request->has('uptd_id'));
-        // if($request)
     }
 }

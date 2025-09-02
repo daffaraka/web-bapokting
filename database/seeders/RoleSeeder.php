@@ -60,7 +60,13 @@ class RoleSeeder extends Seeder
             'pasar-create',
             'pasar-read',
             'pasar-update',
-            'pasar-delete'
+            'pasar-delete',
+
+            // Modul 8  : Manajemen Berita
+            'berita-create',
+            'berita-read',
+            'berita-update',
+            'berita-delete',
         ];
 
         $opUptdPermissions = [
