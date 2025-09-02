@@ -8,7 +8,7 @@
             <form action="{{ route('jenis-komoditas.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label class="fw-bold  for="">Pilih Komoditas</label>
+                    <label class="fw-bold" for="">Pilih Komoditas</label>
                     <select name="komoditas_id" id="komoditas_" class="form-control">
                         <option value="">Pilih Komoditas</option>
                         @foreach ($komoditas as $kom)
@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="nama">Nama Jenis</label>
+                    <label class="fw-bold" for="nama">Nama Jenis</label>
                     <input type="text" name="nama_jenis" id="nama_jenis"
                         class="form-control @error('nama_jenis') is-invalid @enderror" value="{{ old('nama_jenis') }}" required>
                     @error('nama_jenis')
@@ -25,7 +25,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="harga">Harga</label>
+                    <label class="fw-bold" for="harga">Harga</label>
                     <input type="number" name="harga" id="harga"
                         class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') }}" required>
                     @error('harga')
@@ -33,7 +33,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="satuan">Satuan</label>
+                    <label class="fw-bold" for="satuan">Satuan</label>
                     <select name="satuan" id="satuan" class="form-control @error('satuan') is-invalid @enderror"
                         required>
                         <option value="">Pilih Satuan</option>
@@ -52,7 +52,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="type_komoditas">Type Komoditas</label>
+                    <label class="fw-bold" for="type_komoditas">Type Komoditas</label>
                     <select name="type_komoditas" id="type_komoditas" class="form-control @error('type_komoditas') is-invalid @enderror"
                         required>
                         <option value="">Pilih Tipe Komoditas</option>

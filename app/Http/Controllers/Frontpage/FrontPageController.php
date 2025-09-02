@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontpage;
 
 use Carbon\Carbon;
+use App\Models\Pasar;
 use App\Models\Berita;
+use App\Models\Komoditas;
 use Illuminate\Http\Request;
 use App\Models\HargaMonitoring;
 use App\Http\Controllers\Controller;
@@ -91,5 +93,34 @@ class FrontPageController extends Controller
     public function profilBapokting()
     {
         return view('frontend.profil-bapokting');
+    }
+
+
+    public function barangPenting()
+    {
+        $barangPenting = Komoditas::with('jenis_komoditas')->where('type_komoditas', 'Penting')->get();
+        $title = 'Barang Pokok';
+        $deskripsi = 'Barang Pokok adalah komoditas yang sangat dibutuhkan dalam kehidupan sehari-hari dan memiliki nilai strategis tinggi. Berikut adalah daftar Barang Pokok yang diawasi harga dan ketersediaannya oleh Badan Pengawasan dan Pengendalian Daging (Bapokting) Kabupaten Tangerang.';
+
+        $data = [
+            'barangPenting' => $barangPenting,
+            'title' => $title,
+            'deskripsi' => $deskripsi
+        ];
+        return view('frontend.barang-penting', $data);
+    }
+
+    public function barangPokok()
+    {
+        $barangPokok = Komoditas::where('type_komoditas', 'Pokok')->get();
+        $title = 'Barang Pokok';
+        return view('frontend.barang-pokok', compact('barangPenting'));
+    }
+
+    public function hargaPerPasar()
+    {
+        $hargaPerPasar = Pasar::with(['hargaMonitoring'])->get();
+
+        return view('frontend.harga-per-pasar', compact('hargaPerPasar'));
     }
 }

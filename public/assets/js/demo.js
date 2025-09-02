@@ -32,8 +32,8 @@ const modalShowcase = `
 							<div class="d-flex align-items-center flex-column justify-content-center text-center">
 								<img src="assets/img/kaiadmin/logo_documentation.png" height="60" alt="Read Documentation">
 								<div class="docs-info ms-3 mb-4">
-									<h6 class="fw-bold mb-0 op-8 mt-1">Need help?</h6>
-									<p class="fw-bold mb-0 op-5">Please check our docs</p>
+									<h6 class="fw-bold"mb-0 op-8 mt-1">Need help?</h6>
+									<p class="fw-bold"mb-0 op-5">Please check our docs</p>
 								</div>
 							</div>
 							<a href="../../documentation/index.html" class="btn btn-primary w-100 mb-3">Documentation</a>

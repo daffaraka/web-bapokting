@@ -8,7 +8,7 @@
             <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="fw-bold  for="judul_berita">Judul Berita</label>
+                    <label class="fw-bold" for="judul_berita">Judul Berita</label>
                     <input type="text" name="judul_berita" id="judul_berita"
                         class="form-control @error('judul_berita') is-invalid @enderror" value="{{ old('judul_berita') }}"
                         required>
@@ -17,7 +17,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="slug_berita">Slug Berita</label>
+                    <label class="fw-bold" for="slug_berita">Slug Berita</label>
                     <input type="text" name="slug_berita" id="slug_berita"
                         class="form-control @error('slug_berita') is-invalid @enderror" value="{{ old('slug_berita') }}"
                         required>
@@ -26,7 +26,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="konten_berita">Konten Berita</label>
+                    <label class="fw-bold" for="konten_berita">Konten Berita</label>
                     <textarea name="konten_berita" id="konten_berita" cols="30" rows="10"
                         class="form-control @error('konten_berita') is-invalid @enderror">{{ old('konten_berita') }}</textarea>
                     @error('konten_berita')
@@ -34,7 +34,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="gambar_berita">Gambar Berita</label>
+                    <label class="fw-bold" for="gambar_berita">Gambar Berita</label>
                     <input type="file" name="gambar_berita" id="gambar_berita" accept="image/*"
                         class="form-control @error('gambar_berita') is-invalid @enderror"
                         value="{{ old('gambar_berita') }}">
@@ -43,7 +43,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="status_berita">Status Berita</label>
+                    <label class="fw-bold" for="status_berita">Status Berita</label>
                     <select name="status_berita" id="status_berita"
                         class="form-control @error('status_berita') is-invalid @enderror" required>
                         <option value="">Pilih Status Berita</option>
@@ -56,7 +56,7 @@
                     @enderror
                 </div>
                 {{-- <div class="form-group">
-                    <label class="fw-bold  for="published_at_berita">Published At Berita</label>
+                    <label class="fw-bold" for="published_at_berita">Published At Berita</label>
                     <input type="datetime-local" name="published_at_berita" id="published_at_berita"
                         class="form-control @error('published_at_berita') is-invalid @enderror"
                         value="{{ old('published_at_berita') }}" required>

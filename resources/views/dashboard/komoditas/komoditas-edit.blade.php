@@ -9,7 +9,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label class="fw-bold  for="nama_komoditas">Nama Komoditas</label>
+                    <label class="fw-bold" for="nama_komoditas">Nama Komoditas</label>
                     <input type="text" name="nama_komoditas" id="nama_komoditas"
                         class="form-control @error('nama_komoditas') is-invalid @enderror" value="{{ old('nama_komoditas', $komoditas->nama_komoditas) }}"
                         required>

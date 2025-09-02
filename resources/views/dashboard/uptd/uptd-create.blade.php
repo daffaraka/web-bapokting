@@ -6,7 +6,7 @@
         </div>
         <div class="card-body border-bottom">
             <div class="form-group">
-                <label class="fw-bold  for="name"><b>Nama User</b></label>
+                <label class="fw-bold" for="name"><b>Nama User</b></label>
                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
                     value="{{ old('name') }}" required>
                 @error('name')
@@ -14,7 +14,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label class="fw-bold  for="email"><b>Email</b></label>
+                <label class="fw-bold" for="email"><b>Email</b></label>
                 <input type="email" name="email" id="email"
                     class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                 @error('email')
@@ -22,7 +22,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label class="fw-bold  for="password"><b>Password</b></label>
+                <label class="fw-bold" for="password"><b>Password</b></label>
                 <input type="password" name="password" id="password"
                     class="form-control @error('password') is-invalid @enderror" required>
                 @error('password')
@@ -30,7 +30,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label class="fw-bold  for="role"><b>Role</b></label>
+                <label class="fw-bold" for="role"><b>Role</b></label>
                 <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
                     <option value="">Pilih Jabatan</option>
                     <option value="admin">Admin</option>
@@ -46,7 +46,7 @@
             <form action="{{ route('user-uptd.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label class="fw-bold  for="name"><b>Nama UPTD</b></label>
+                    <label class="fw-bold" for="name"><b>Nama UPTD</b></label>
                     <input type="text" name="nama_uptd" id="nama_uptd"
                         class="form-control @error('nama_uptd') is-invalid @enderror" value="{{ old('nama_uptd') }}"
                         required>
@@ -55,7 +55,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="role"><b>Pasar</b></label>
+                    <label class="fw-bold" for="role"><b>Pasar</b></label>
                     <div class="row">
                         @foreach ($pasar as $key => $p)
                             @if ($key % 4 == 0)
@@ -66,7 +66,7 @@
                             <div class="form-check">
                                 <input class="form-check-input @error('role') is-invalid @enderror" type="checkbox"
                                     name="role[]" id="pasar{{ $p->id }}" value="{{ $p->id }}">
-                                <label class="fw-bold  class="form-check-label" for="pasar{{ $p->id }}">{{ $p->nama }}</label>
+                                <label class="fw-bold" class="form-check-label" for="pasar{{ $p->id }}">{{ $p->nama }}</label>
                             </div>
                         </div>
                         @endforeach

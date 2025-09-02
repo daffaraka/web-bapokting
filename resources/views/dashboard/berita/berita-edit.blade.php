@@ -11,7 +11,7 @@
 
                     {{-- Judul --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="judul_berita">Judul Berita</label>
+                        <label class="fw-bold" for="judul_berita">Judul Berita</label>
                         <input type="text" name="judul_berita" id="judul_berita"
                             class="form-control @error('judul_berita') is-invalid @enderror"
                             value="{{ old('judul_berita', $berita->judul_berita) }}" required>
@@ -22,7 +22,7 @@
 
                     {{-- Slug --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="slug_berita">Slug Berita</label>
+                        <label class="fw-bold" for="slug_berita">Slug Berita</label>
                         <input type="text" name="slug_berita" id="slug_berita"
                             class="form-control @error('slug_berita') is-invalid @enderror"
                             value="{{ old('slug_berita', $berita->slug_berita) }}" required>
@@ -33,7 +33,7 @@
 
                     {{-- Konten --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="konten_berita">Konten Berita</label>
+                        <label class="fw-bold" for="konten_berita">Konten Berita</label>
                         <textarea name="konten_berita" id="konten_berita" cols="30" rows="10"
                             class="form-control @error('konten_berita') is-invalid @enderror">{{ old('konten_berita', $berita->konten_berita) }}</textarea>
                         @error('konten_berita')
@@ -43,7 +43,7 @@
 
                     {{-- Gambar --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="gambar_berita">Gambar Berita</label>
+                        <label class="fw-bold" for="gambar_berita">Gambar Berita</label>
                         @if ($berita->gambar_berita)
                             <div class="mb-2">
                                 <img src="{{ asset($berita->gambar_berita) }}" alt="Current Image" class="img-thumbnail"
@@ -59,7 +59,7 @@
 
                     {{-- Status --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="status_berita">Status</label>
+                        <label class="fw-bold" for="status_berita">Status</label>
                         <select name="status_berita" id="status_berita"
                             class="form-control @error('status_berita') is-invalid @enderror" required>
                             <option value="draft"
@@ -76,7 +76,7 @@
 
                     {{-- Tanggal Publish --}}
                     <div class="form-group mb-3">
-                        <label class="fw-bold  for="published_at">Tanggal Publish</label>
+                        <label class="fw-bold" for="published_at">Tanggal Publish</label>
                         <input type="datetime-local" name="published_at" id="published_at"
                             class="form-control @error('published_at') is-invalid @enderror"
                             value="{{ old('published_at', $berita->published_at ? $berita->published_at->format('Y-m-d TH:i') : '') }}">

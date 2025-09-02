@@ -18,8 +18,9 @@
                               class="bi bi-chevron-down toggle-dropdown"></i></a>
                       <ul>
                           <li><a href="">Harga HET</a></li>
-                          <li><a href="">Barang Pokok</a></li>
-                          <li><a href="">Barang Penting</a></li>
+                          <li><a href="{{route('barang-pokok')}}">Barang Pokok</a></li>
+                          <li><a href="{{route('barang-penting')}}">Barang Penting</a></li>
+                          <li><a href="{{route('harga-per-pasar')}}">Perbandingan Harga Bapok</a></li>
 
                       </ul>
                   </li>

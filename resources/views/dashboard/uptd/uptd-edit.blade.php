@@ -11,7 +11,7 @@
 
                 <div class="mb-3 border-bottom">
                     <div class="form-group">
-                        <label class="fw-bold  for="name"><b>Nama User</b></label>
+                        <label class="fw-bold" for="name"><b>Nama User</b></label>
                         <input type="text" name="name" id="name"
                             class="form-control @error('name') is-invalid @enderror"
                             value="{{ $uptd->user->name ?? old('name') }}" required>
@@ -20,7 +20,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="fw-bold  for="email"><b>Email</b></label>
+                        <label class="fw-bold" for="email"><b>Email</b></label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror"
                             value="{{ $uptd->user->email ?? old('email') }}" required>
@@ -29,7 +29,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="fw-bold  for="password"><b>Password</b></label>
+                        <label class="fw-bold" for="password"><b>Password</b></label>
                         <input type="password" name="password" id="password"
                             class="form-control @error('password') is-invalid @enderror" required>
                         @error('password')
@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="fw-bold  for="role"><b>Role</b></label>
+                        <label class="fw-bold" for="role"><b>Role</b></label>
                         <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
                             required>
                             <option value="">Pilih Jabatan</option>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="name">Nama UPTD</label>
+                    <label class="fw-bold" for="name">Nama UPTD</label>
                     <input type="text" name="nama_uptd" id="nama_uptd"
                         class="form-control @error('nama_uptd') is-invalid @enderror"
                         value="{{ old('nama_uptd', $uptd->nama_uptd) }}" required>
@@ -62,7 +62,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="fw-bold  for="pasar" class="fw-bold">Pasar (Yang belum mempunyai UPTD)</label>
+                    <label class="fw-bold" for="pasar" class="fw-bold">Pasar (Yang belum mempunyai UPTD)</label>
                     <div class="row">
                         @foreach ($pasar as $key => $p)
                             @if ($key % 4 == 0)
@@ -74,7 +74,7 @@
                                 <input class="form-check-input @error('pasar_id') is-invalid @enderror" type="checkbox"
                                     name="pasar_id[]" id="pasar_{{ $p->id }}" value="{{ $p->id }}"
                                     {{ in_array($p->id, old('pasar_id', $uptd->pasars->pluck('id')->toArray())) ? 'checked' : '' }}>
-                                <label class="fw-bold  class="form-check-label" for="pasar{{ $p->id }}">{{ $p->nama }}</label>
+                                <label class="fw-bold" class="form-check-label" for="pasar{{ $p->id }}">{{ $p->nama }}</label>
                             </div>
                         </div>
                         @endforeach

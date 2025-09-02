@@ -26,20 +26,20 @@
                             <div class="text-center mb-5">
                                 <h3 class="text-uppercase">Login to <strong>BAPOKTING</strong></h3>
                             </div>
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('login') }}" class="mt-4">
                                 @csrf
                                 <div class="form-group first">
-                                    <label class="fw-bold  for="email">Email</label>
+                                    <label for="email" class="fw-bold">Email</label>
                                     <input type="email" class="form-control" placeholder="your-email@gmail.com"
                                         id="email" name="email" value="{{ old('email') }}" required autofocus>
                                 </div>
                                 <div class="form-group last mb-3">
-                                    <label class="fw-bold  for="password">Password</label>
+                                    <label for="password" class="fw-bold">Password</label>
                                     <input type="password" class="form-control" placeholder="Your Password"
                                         id="password" name="password" required autocomplete="current-password">
                                 </div>
                                 <div class="d-sm-flex mb-5 align-items-center">
-                                    <label class="fw-bold  class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
+                                    <label class="fw-bold"control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
                                             me</span>
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
@@ -48,7 +48,8 @@
                                     <span class="ml-auto"><a href="{{ route('password.request') }}"
                                             class="forgot-pass">Forgot Password</a></span>
                                 </div>
-                                <input type="submit" value="Log In" class="btn btn-block py-2 text-white" style="background-color: #2a2c39;">
+                                <input type="submit" value="Log In" class="btn btn-block py-2 text-white"
+                                    style="background-color: #2a2c39;">
                                 {{-- <span class="text-center my-3 d-block">or</span>
                                 <div class="">
                                     <a href="#" class="btn btn-block py-2 btn-facebook">

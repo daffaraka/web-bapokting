@@ -32,7 +32,9 @@ Route::prefix('komoditas')->group(function () {
 });
 
 Route::get('profil-bapokting', [FrontPageController::class, 'profilBapokting'])->name('profil-bapokting');
-
+Route::get('barang-penting', [FrontPageController::class, 'barangPenting'])->name('barang-penting');
+Route::get('barang-pokok', [FrontPageController::class, 'barangPokok'])->name('barang-pokok');
+Route::get('harga-per-pasar', [FrontPageController::class, 'hargaPerPasar'])->name('harga-per-pasar');
 
 // Dashboard
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {

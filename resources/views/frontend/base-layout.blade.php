@@ -90,6 +90,12 @@
 
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.3.1/css/rowGroup.dataTables.min.css">
+    <script src="https://cdn.datatables.net/rowgroup/1.3.1/js/dataTables.rowGroup.min.js"></script>
     <script src="{{ asset('frontpage/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/aos/aos.js') }}"></script>
@@ -98,6 +104,7 @@
     <script src="{{ asset('frontpage/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/js/main.js') }}"></script>
+
 
     @stack('scripts')
 </body>
