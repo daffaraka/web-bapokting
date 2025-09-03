@@ -39,7 +39,7 @@
                                         id="password" name="password" required autocomplete="current-password">
                                 </div>
                                 <div class="d-sm-flex mb-5 align-items-center">
-                                    <label class="fw-bold"control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
+                                    <label class="fw-bold control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember
                                             me</span>
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
