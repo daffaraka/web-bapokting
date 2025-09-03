@@ -3,8 +3,8 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="{{ route('dashboard') }}" class="logo align-items-center">
-                <img src="{{ asset('assets/img/logo-bapokting.png') }}" alt="navbar brand"
-                     class="navbar-brand" width="100" />
+                <img src="{{ asset('assets/img/logo-bapokting.png') }}" alt="navbar brand" class="navbar-brand"
+                    width="100" />
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -49,23 +49,21 @@
                         </span>
                         <h4 class="text-section">Frontpage</h4>
                     </li>
+                    {{-- Berita --}}
+                    @can('berita-read')
+                        <li class="nav-item {{ request()->routeIs('berita.*') ? 'active' : '' }}">
+                            <a href="{{ route('berita.index') }}">
+                                <i class="fas fa-newspaper"></i>
+                                <p>Berita</p>
+                            </a>
+                        </li>
+                    @endcan
                 @endrole
 
-                {{-- Berita --}}
-                @can('berita-read')
-                    <li class="nav-item {{ request()->routeIs('berita.*') ? 'active' : '' }}">
-                        <a href="{{ route('berita.index') }}">
-                            <i class="fas fa-newspaper"></i>
-                            <p>Berita</p>
-                        </a>
-                    </li>
-                @endcan
 
                 {{-- Data Section --}}
-                @canany([
-                    'komoditas-read', 'jenis-komoditas-read', 'harga-read',
-                    'laporan-read', 'user-read', 'uptd-read', 'pasar-read'
-                ])
+                @canany(['komoditas-read', 'jenis-komoditas-read', 'harga-read', 'laporan-read', 'user-read',
+                    'uptd-read', 'pasar-read'])
                     <li class="nav-section">
                         <span class="sidebar-mini-icon">
                             <i class="fa fa-ellipsis-h"></i>

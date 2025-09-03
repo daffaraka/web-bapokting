@@ -45,6 +45,7 @@ class PerkembanganHargaController extends Controller
             'perkembanganHargas' => $perkembangan,
             'modul' => 'Perkembangan Harga',
             'route_create' => $this->routeCreate,
+            'create_permission' => 'perkembangan-harga-create',
 
         ];
         return view('dashboard.perkembangan-harga.perkembangan-harga-index', $data);

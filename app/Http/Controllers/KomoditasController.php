@@ -27,7 +27,8 @@ class KomoditasController extends Controller
             'title' => 'Data Komoditas',
             'description' => 'Halaman ini menampilkan data komoditas yang ada di dalam database',
             'route_create' => $this->routeCreate,
-            'modul' => 'Komoditas'
+            'modul' => 'Komoditas',
+            'create_permission' => 'komoditas-create'
         ];
         return view('dashboard.komoditas.komoditas-index', $data);
     }

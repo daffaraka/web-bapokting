@@ -16,7 +16,8 @@ class ManajemenBeritaController extends Controller
             'description' => 'Halaman ini digunakan untuk menampilkan data Berita',
             'beritas' => Berita::with('user')->latest()->get(),
             'modul' => 'Berita',
-            'route_create' => route('berita.create')
+            'route_create' => route('berita.create'),
+            'create_permission' => 'berita-create'
         ];
         return view('dashboard.berita.berita-index', $data);
     }

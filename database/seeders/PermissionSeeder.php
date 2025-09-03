@@ -40,21 +40,21 @@ class PermissionSeeder extends Seeder
             'harga-view-history',
 
             // Modul 4: Laporan & Visualisasi
-            'laporan-create',     // jika ada fitur buat laporan manual
-            'laporan-read',       // lihat laporan seluruh wilayah
-            'laporan-update',     // jika laporan bisa diubah (opsional)
-            'laporan-delete',     // jika laporan bisa dihapus (opsional)
-            'laporan-filter',     // filter laporan
-            'laporan-download',   // download excel/pdf
-            'laporan-grafik',     // lihat grafik
+            'perkembangan-harga-create',     // jika ada fitur buat laporan manual
+            'perkembangan-harga-read',       // lihat laporan seluruh wilayah
+            'perkembangan-harga-update',     // jika laporan bisa diubah (opsional)
+            'perkembangan-harga-delete',     // jika laporan bisa dihapus (opsional)
+            'perkembangan-harga-filter',     // filter laporan
+            'perkembangan-harga-download',   // download excel/pdf
+            'perkembangan-harga-grafik',     // lihat grafik
 
             // Modul 5: Manajemen User
-            'user-create',        // tambah operator
-            'user-read',          // lihat daftar user
-            'user-update',        // edit user / profil sendiri
-            'user-delete',        // hapus operator
-            'user-login',         // login ke sistem
-            'user-password',      // ganti password sendiri
+            'user-uptd-create',        // tambah operator
+            'user-uptd-read',          // lihat daftar user
+            'user-uptd-update',        // edit user / profil sendiri
+            'user-uptd-delete',        // hapus operator
+            'user-uptd-login',         // login ke sistem
+            'user-uptd-password',      // ganti password sendiri
 
             // Modul 6: Manajemen UPTD
             'uptd-create',

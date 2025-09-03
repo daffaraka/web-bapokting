@@ -18,7 +18,8 @@ class PasarController extends Controller
             'description' => 'Halaman ini digunakan untuk menampilkan data Pasar',
             'pasars' => Pasar::with('uptd')->latest()->get(),
             'modul' => 'Pasar',
-            'route_create' => route('pasar.create')
+            'route_create' => route('pasar.create'),
+            'create_permission' => 'pasar-create'
         ];
 
         return view('dashboard.pasar.pasar-index', $data);

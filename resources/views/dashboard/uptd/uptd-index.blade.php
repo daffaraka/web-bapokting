@@ -20,7 +20,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $uptd->nama_uptd }}</td>
-                                <td>{{ $uptd->users->name }}</td>
+                                <td>{{ $uptd->user->name }}</td>
                                 <td>
                                     <div class="form-button-action gap-2">
                                         <a href="{{ route('user-uptd.edit', $uptd->id) }}" class="btn btn-primary "

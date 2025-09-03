@@ -16,11 +16,12 @@ class UPTDController extends Controller
     public function index()
     {
         $data = [
-            'uptds' => UPTD::with('users')->get(),
+            'uptds' => UPTD::with('user')->get(),
             'title' => 'Data User & UPTD',
             'description' => 'Halaman ini menampilkan data UPTD yang ada di dalam database',
             'route_create' => route('user-uptd.create'),
-            'modul' => 'User & UPTD'
+            'modul' => 'User & UPTD',
+            'create_permission' => 'user-uptd-create'
         ];
 
         // dd($data['uptds']);
