@@ -233,18 +233,44 @@ class PerkembanganHargaController extends Controller
 
     protected function getPerkembanganHargaData($tanggal_awal, $tanggal_akhir)
     {
+
+        $user = User::with('uptd.pasars')->find(Auth::user()->id);
+        $pasar = $user->uptd->pasars->pluck('id')->toArray();
+
+
+
         if (is_null($tanggal_awal) && is_null($tanggal_akhir)) {
-            $komoditas = JenisKomoditas::with([
-                'harga_monitorings.pasar.uptd',
-                'komoditas',
-                'harga_monitorings.jenis_komoditas'
-            ])->get();
+
+            if (Auth::user()->hasRole('admin')) {
+                $komoditas = JenisKomoditas::with([
+                    'harga_monitorings.pasar.uptd',
+                    'komoditas',
+                    'harga_monitorings.jenis_komoditas'
+                ])->get();
+            } else {
+                $komoditas = JenisKomoditas::with([
+                    'harga_monitorings.pasar.uptd',
+                    'komoditas',
+                    'harga_monitorings.jenis_komoditas'
+                ])->whereHas('harga_monitorings', function ($q) use ($pasar) {
+                    $q->whereIn('pasar_id', $pasar);
+                })->get();
+            }
         } else {
-            $komoditas = JenisKomoditas::whereHas('harga_monitorings', function ($q) use ($tanggal_awal, $tanggal_akhir) {
-                if ($tanggal_awal && $tanggal_akhir) {
-                    $q->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir]);
-                }
-            })->get();
+            if (Auth::user()->hasRole('admin')) {
+                $komoditas = JenisKomoditas::whereHas('harga_monitorings', function ($q) use ($tanggal_awal, $tanggal_akhir) {
+                    if ($tanggal_awal && $tanggal_akhir) {
+                        $q->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir]);
+                    }
+                })->get();
+            } else {
+                $komoditas = JenisKomoditas::whereHas('harga_monitorings', function ($q) use ($tanggal_awal, $tanggal_akhir, $pasar) {
+                    $q->whereIn('pasar_id', $pasar);
+                    if ($tanggal_awal && $tanggal_akhir) {
+                        $q->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir]);
+                    }
+                })->get();
+            }
 
             $komoditas->load([
                 'harga_monitorings' => function ($q) use ($tanggal_awal, $tanggal_akhir) {
