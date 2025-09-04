@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'uptd_id',
 
     ];
 
@@ -50,7 +51,7 @@ class User extends Authenticatable
 
     public function uptd()
     {
-        return $this->belongsTo(UPTD::class);
+        return $this->hasOne(UPTD::class);
     }
 
     public function hargaMonitorings()

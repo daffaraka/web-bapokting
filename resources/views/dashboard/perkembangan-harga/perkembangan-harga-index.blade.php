@@ -88,14 +88,19 @@
                                                 class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="{{route('perkembangan-harga.destroy', $monitoring->id)}}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm deleteBtn"
-                                                    data-bs-toggle="tooltip" title="Delete">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>
+
+                                            @can('perkembangan-harga-delete')
+                                                <form action="{{ route('perkembangan-harga.destroy', $monitoring->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger btn-sm deleteBtn"
+                                                        data-bs-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+
                                         </div>
                                     </td>
                                 </tr>

@@ -80,7 +80,7 @@
                         </li>
                     @endcan
 
-                    @can('laporan-read')
+                    @can('perkembangan-harga-read')
                         <li class="nav-item {{ request()->routeIs('perkembangan-harga.*') ? 'active' : '' }}">
                             <a href="{{ route('perkembangan-harga.index') }}">
                                 <i class="fas fa-chart-bar"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\UPTD;
+use App\Models\User;
 use App\Models\Pasar;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
@@ -26,16 +27,41 @@ class PerkembanganHargaController extends Controller
     public function index()
     {
 
+
+
+
+        $user = User::with('uptd.pasars')->find(Auth::user()->id);
+
         // $perkembangan = HargaMonitoring::with(['komoditas','pasar','user'])->get()->groupBy('komoditas.nama')->toArray();
 
-        $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
-            return [
-                'komoditas' => $perkembangan->komoditas->nama_komoditas,
-                'harga_monitorings' => $perkembangan->harga_monitorings,
-            ];
-        });
+        if (Auth::user()->hasRole('admin')) {
+            $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])
+                ->whereHas('harga_monitorings')
+                ->get()->map(function ($perkembangan) {
+                    return [
+                        'komoditas' => $perkembangan->komoditas->nama_komoditas,
+                        'harga_monitorings' => $perkembangan->harga_monitorings,
+                    ];
+                });
+        } else {
+            $pasar = $user->uptd->pasars->pluck('id')->toArray();
 
-        $uptd = UPTD::select('id', 'nama_uptd')->get();
+
+            // dd($pasar);
+
+            $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])
+                ->whereHas('harga_monitorings', function ($q) use ($pasar) {
+                    $q->whereIn('pasar_id', $pasar);
+                })->get()->map(function ($perkembangan) {
+                    return [
+                        'komoditas' => $perkembangan->komoditas->nama_komoditas,
+                        'harga_monitorings' => $perkembangan->harga_monitorings,
+                    ];
+                });
+        }
+
+
+        // dd($perkembangan);
 
 
         $data = [
@@ -255,6 +281,5 @@ class PerkembanganHargaController extends Controller
             $data = JenisKomoditas::where('komoditas_id', $request->komoditas_id)->get();
             return response()->json($data);
         }
-
     }
 }

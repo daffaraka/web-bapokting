@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UPTD;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,6 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // $uptd = UPTD::all()->pluck('id')->toArray();
 
         $admin = User::create([
             'name' => 'Admin',
@@ -33,11 +36,11 @@ class UserSeeder extends Seeder
         }
 
 
-        for ($i=1; $i <= 7; $i++) {
+        for ($i=1; $i <= 10; $i++) {
            $uptd =  User::factory()->create([
                 'name' => 'UPTD ' . $i,
                 'email' => 'uptd' . $i . '@example.com',
-                'password' => 'password'
+                'password' => 'password',
             ]);
 
             $uptd->assignRole('op_uptd');

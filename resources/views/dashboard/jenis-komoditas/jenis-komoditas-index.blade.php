@@ -66,15 +66,19 @@
                                             class="btn btn-primary " data-bs-toggle="tooltip" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('jenis-komoditas.destroy', $komoditas->id) }}" method="POST"
-                                            style="display:inline;" id="form_delete">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"
-                                                title="Delete">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </form>
+
+                                        @can('jenis-komoditas-delete')
+                                            <form action="{{ route('jenis-komoditas.destroy', $komoditas->id) }}" method="POST"
+                                                style="display:inline;" id="form_delete">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="deleteBtn btn btn-danger" data-bs-toggle="tooltip"
+                                                    title="Delete">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
+
                                     </div>
                                 </td>
 
@@ -89,8 +93,6 @@
 
 @push('scripts')
     <script>
-
-
         const registerDeleteItemHandlers = () => {
 
             $(".deleteBtn").click(function(e) {
