@@ -12,8 +12,8 @@
                     @foreach ($availKomoditas->chunk(4)->first() as $item)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
-                                id="komoditas{{ $item->komoditas_id }}">
-                            <label class="fw-bold" class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
+                                id="komoditas_{{ $item->komoditas_id }}">
+                            <label class="fw-bold" class="form-check-label" for="komoditas_{{ $item->komoditas_id }}">
                                 {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
@@ -23,8 +23,8 @@
                     @foreach ($availKomoditas->chunk(4)->get(1) as $item)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
-                                id="komoditas{{ $item->komoditas_id }}">
-                            <label class="fw-bold" class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
+                                id="komoditas_{{ $item->komoditas_id }}">
+                            <label class="fw-bold" class="form-check-label" for="komoditas_{{ $item->komoditas_id }}">
                                 {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
@@ -34,8 +34,8 @@
                     @foreach ($availKomoditas->chunk(4)->get(2) as $item)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
-                                id="komoditas{{ $item->komoditas_id }}">
-                            <label class="fw-bold" class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
+                                id="komoditas_{{ $item->komoditas_id }}">
+                            <label class="fw-bold" class="form-check-label" for="komoditas_{{ $item->komoditas_id }}">
                                 {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
@@ -45,8 +45,8 @@
                     @foreach ($availKomoditas->chunk(4)->get(3) as $item)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{ $item->komoditas_id }}"
-                                id="komoditas{{ $item->komoditas_id }}">
-                            <label class="fw-bold" class="form-check-label" for="komoditas{{ $item->komoditas_id }}">
+                                id="komoditas_{{ $item->komoditas_id }}">
+                            <label class="fw-bold" class="form-check-label" for="komoditas_{{ $item->komoditas_id }}">
                                 {{ $item->jenis_komoditas->nama_jenis }}
                             </label>
                         </div>
@@ -135,6 +135,11 @@
                 }
             });
         })
+
+
+        $(".checkbox").click(function() {
+            $(this).find("input").prop("checked", $(this).find("input").prop("checked") ? false : true);
+        });
 
         var multipleLineChart = document.getElementById("multipleLineChart").getContext("2d");
 
