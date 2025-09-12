@@ -98,6 +98,7 @@ class RoleSeeder extends Seeder
             'harga-view-history',
 
             // Modul 5: Laporan & Visualisasi
+            'perkembangan-harga-create',
             'perkembangan-harga-read', // lihat laporan seluruh wilayah\
             'perkembangan-harga-filter',
             'perkembangan-harga-download',
