@@ -38,6 +38,16 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+<style>
+    #basic-datatables_filter {
+        float: right;
+
+    }
+
+    #basic-datatables_paginate {
+        float: right;
+    }
+</style>
 
 <body class="index-page">
 
@@ -70,6 +80,90 @@
 
             </div>
 
+        </section>
+
+
+        <section class="section">
+            <div class="container mt-5">
+
+                <div class="container section-title" data-aos="fade-up">
+                    <h2> Perkembangan Harga</h2>
+                    <p>Tabel data perkembangan harga<br></p>
+                </div><!-- End Section Title -->
+                <div class="row">
+                    {{-- <div class="col-12 py-5">
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="tanggal_awal" class="form-label">Pasar</label>
+
+                                    <select name="pasar_id" id="pasar_id" class="form-control">
+                                        <option value="">Semua Pasar</option>
+                                        @foreach ($pasar as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ request()->query('pasar_id') == $item->id ? 'selected' : '' }}>
+                                                {{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="tanggal_awal" class="form-label">Tanggal Awal</label>
+                                    <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal"
+                                        value="{{ request()->query('tanggal_awal') }}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="tanggal_akhir" class="form-label">Tanggal Akhir</label>
+                                    <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir"
+                                        value="{{ request()->query('tanggal_akhir') }}">
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-warning w-100" id="btnFilter">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div> --}}
+
+                    <div class="col-12">
+
+                        <div class="table-responsive my-4">
+                            <table id="basic-datatables" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama Komoditas</th>
+                                        <th>Jenis Komoditas</th>
+                                        <th>Nama Pasar</th>
+                                        <th>UPTD</th>
+                                        <th>Tanggal</th>
+                                        <th>Harga</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($perkembangan as $k => $perkembanganHarga)
+                                        @foreach ($perkembanganHarga['harga_monitorings'] as $i => $monitoring)
+                                            <tr>
+                                                <td>{{ $k + 1 . '.' . ($i + 1) }}</td>
+                                                <td>{{ $perkembanganHarga['komoditas'] }}</td> {{-- Komoditas langsung ditaruh di kolom --}}
+                                                <td>{{ $monitoring->jenis_komoditas->nama_jenis }}</td>
+                                                <td>{{ $monitoring->pasar->nama }}</td>
+                                                <td>{{ $monitoring->pasar->uptd->nama_uptd }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($monitoring->tanggal)->locale('id_ID')->isoFormat('D MMMM YYYY') }}
+                                                </td>
+                                                <td>{{ 'Rp ' . number_format($monitoring->harga, 0, ',', '.') }}</td>
+
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /About Section -->
 
@@ -255,7 +349,7 @@
 
 
         <!-- Contact Section -->
-        <section id="contact" class="contact section">
+        {{-- <section id="contact" class="contact section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -334,7 +428,7 @@
 
             </div>
 
-        </section><!-- /Contact Section -->
+        </section><!-- /Contact Section --> --}}
 
     </main>
 
@@ -377,6 +471,12 @@
 
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.3.1/css/rowGroup.dataTables.min.css">
+    <script src="https://cdn.datatables.net/rowgroup/1.3.1/js/dataTables.rowGroup.min.js"></script>
     <script src="{{ asset('frontpage/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('frontpage/assets/vendor/aos/aos.js') }}"></script>
@@ -422,6 +522,22 @@
                     },
                 },
             },
+        });
+
+
+        $('#basic-datatables').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            columnDefs: [{
+                    orderable: false,
+                    targets: [6]
+                },
+
+            ],
+            rowGroup: {
+                dataSrc: 1 // kolom ke-2 → "Nama Komoditas"
+            }
         });
     </script>
     @stack('scripts')

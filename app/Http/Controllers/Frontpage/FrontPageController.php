@@ -75,11 +75,20 @@ class FrontPageController extends Controller
         $berita = Berita::where('status_berita', 'published')->limit(6)->get();
 
 
+
+        $perkembangan = JenisKomoditas::with(['harga_monitorings.pasar.uptd', 'komoditas', 'harga_monitorings.jenis_komoditas'])->whereHas('harga_monitorings')->get()->map(function ($perkembangan) {
+            return [
+                'komoditas' => $perkembangan->komoditas->nama_komoditas,
+                'harga_monitorings' => $perkembangan->harga_monitorings,
+            ];
+        });
+
         $data = [
             'berita' => $berita,
             'hargaMonitorings' => $hargaMonitoring,
             'labels' => $labels,
             'datasets' => $datasets,
+            'perkembangan' => $perkembangan
         ];
         return view('frontend.index', $data);
     }
